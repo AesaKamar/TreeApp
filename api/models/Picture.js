@@ -28,6 +28,9 @@ module.exports = {
     toJSON: function() {
       var obj = this.toObject();
       return obj;
+    },
+    beforeCreate: function(user, cb) {
+      //Make sure filename is checked out
     }
   }
 };

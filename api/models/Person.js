@@ -35,13 +35,12 @@ module.exports = {
     },
     relations: {
       collection: 'person',
-      via: 'related_to',
+      via: 'related_from',
       through: 'relation'
     },
     toJSON: function() {
       var obj = this.toObject();
       return obj;
     }
-
   }
 };
