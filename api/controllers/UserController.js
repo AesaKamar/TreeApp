@@ -12,7 +12,8 @@ module.exports = {
     //Creates a User in the database based on
     var params = req.params.all();
     User.create({
-      email: params.email
+      email: params.email,
+      password: params.password
     })
     //CALLBACK ON SUCCESS OR FAIL
     //err contains the error messages if action failed
