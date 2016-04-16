@@ -22,7 +22,7 @@ module.exports = {
     },
     people: {
       collection: 'person',
-      via: 'tag',
+      via: 'person',
       through: 'tag'
     },
     toJSON: function() {
