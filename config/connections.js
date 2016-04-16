@@ -86,7 +86,7 @@ module.exports.connections = {
     host: 'localhost',
     user: 'dev',
     password: 'dev',
-    database: 'cambridgedatabase'
+    database: 'treeapp'
   },
 
 

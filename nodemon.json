@@ -1,5 +1,5 @@
-//Configuration for nodemon to ignore .tmp/ directory
-
 {
-    "ignore": [".tmp/"]
+    "ignore": [
+      ".tmp/"
+    ]
 }
