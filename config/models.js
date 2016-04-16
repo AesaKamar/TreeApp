@@ -18,9 +18,8 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
   // connection: 'localDiskDb',
-  connection: 'localpostgresDB'
-  /***********************************************
-  ****************************
+  connection: 'localpostgresDB',
+  /***************************************************************************
   *                                                                          *
   * How and whether Sails will attempt to automatically rebuild the          *
   * tables/collections/etc. in your schema.                                  *
@@ -28,6 +27,11 @@ module.exports.models = {
   * See http://sailsjs.org/#!/documentation/concepts/ORM/model-settings.html  *
   *                                                                          *
   ***************************************************************************/
-  // migrate: 'alter'
+  migrate: 'drop',
+
+  //Database preconfiguration fo tables
+  autoPK: true,
+  autoCreatedAt: true,
+  autoUpdatedAt: true
 
 };
