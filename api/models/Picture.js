@@ -5,6 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+var fs = require("fs");
 module.exports = {
 
   attributes: {
@@ -14,7 +15,8 @@ module.exports = {
     },
     file_path: {
       type: 'string',
-      required: true
+      required: true,
+      unique: true
     },
     owner: {
       model: 'user',
