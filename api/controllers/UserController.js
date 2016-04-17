@@ -12,19 +12,13 @@ module.exports = {
     //Creates a User in the database based on
     var params = req.params.all();
     User.create({
-      email: params.email,
-      password: params.password
-    })
-    //CALLBACK ON SUCCESS OR FAIL
-    //err contains the error messages if action failed
-    //
-    //created, or whatever we decide to call it, contains
-    //The object that was returned by the action, in this case
-    //it is the user that we returned from the User.create() call
-    .exec(function createCB(err, created) {
-      return res.json({
-        notice: created || err
+        email: params.email,
+        password: params.password
+      })
+      //CALLBACK ON SUCCESS OR FAIL
+      .exec(function createCB(err, created) {
+        // console.log(res.status());
+        return (err ? res.json(400, err): res.json(202,created) );
       });
-    });
   }
 };
