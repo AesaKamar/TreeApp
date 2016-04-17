@@ -1,3 +1,3 @@
 (function() {
-  var app = angular.module('cambridgeHomes', []);
+  var app = angular.module('treeApp', []);
 })();
