@@ -1,6 +1,6 @@
 (function() {
   angular
-    .module('cambridgeHomes')
+    .module('treeApp')
     .controller('HomeController', HomeController);
 
   HomeController.$inject = [];

@@ -42,18 +42,21 @@ describe('UserController', function() {
           "message": "Incorrect email.",
           "user": false
         }, done);
-      // .expect('location','/mypage', done);
     });
-    // it('should login an authenticated user', function(done) {
-    //   request(sails.hooks.http.app)
-    //     .post('/login')
-    //     .send({
-    //       email: 'test',
-    //       password: 'test'
-    //     })
-    //     .expect(302)
-    //     .expect('location', '/mypage', done);
-    // });
+    it('should login an authenticated user', function(done) {
+      request(sails.hooks.http.app)
+        .post('/login')
+        .send({
+          email: 'good@email.com',
+          password: 'goodPass123'
+        })
+        .expect(200, done);
+    });
+    it('should allow a user to access /index', function(done) {
+      request(sails.hooks.http.app)
+        .get('/index')
+        .expect(302, done);
+    });
   });
 
 });
