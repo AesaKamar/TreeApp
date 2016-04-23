@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-describe('PersonModel', function() {
+describe('AddressModel', function() {
 
   describe('#create()', function() {
     it('should create a new Address', function (done) {

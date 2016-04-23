@@ -39,7 +39,7 @@
         });
       }
 
-      var Sigma = new sigma({
+      $scope.Sigma = new sigma({
         graph: graph,
         renderers: [{
           container: document.getElementById('GraphContainer'),
@@ -49,19 +49,20 @@
 
       // Allow custom shapes
       // FIXME currently disabled because there is no support with webGL renderer
-      // CustomShapes.init(Sigma);
-      // Sigma.refresh();
+      // CustomShapes.init($scope.Sigma);
+      // $scope.Sigma.refresh();
 
       // Force directed graph.
       // Barnes-Hut works best at scale, bad for low density
-      Sigma.startForceAtlas2({
+      $scope.Sigma.startForceAtlas2({
         worker: true,
         barnesHutOptimize: false
       });
 
       // Finally, let's ask our sigma instance to refresh:
-      Sigma.refresh();
-      $timeout(function(){Sigma.stopForceAtlas2();}, 5000);    
+      $scope.Sigma.refresh();
+      var timeout= 5000;
+      $timeout(function(){$scope.Sigma.stopForceAtlas2();}, timeout);
     };
 
   }

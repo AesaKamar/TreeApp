@@ -1,4 +1,5 @@
 const assert = require('assert');
+var Promise = require('bluebird');
 
 describe('RelationModel', function() {
 
@@ -60,6 +61,67 @@ describe('RelationModel', function() {
           done();
         })
         .catch(done);
+    });
+  });
+
+  describe('Multiple Relations', function() {
+    var p;
+    it('should create a family', function(done) {
+      Promise.all([
+          Person.create({
+            first_name: 'Apple',
+            last_name: 'Flowers'
+          }),
+          Person.create({
+            first_name: 'Banana',
+            last_name: 'Flowers'
+          }),
+          Person.create({
+            first_name: 'Carrot',
+            last_name: 'Flowers'
+          }),
+          Person.create({
+            first_name: 'Debby',
+            last_name: 'Flowers'
+          })
+        ])
+        .then(Person.count()).then(function(res) {
+          p = res;
+          assert(res.length == 4);
+        })
+        .then(done).catch(done);
+    });
+    it('should add relations to the family', function(done) {
+      Promise.all([
+          Relation.create({
+            related_from: p[0],
+            related_to: p[1],
+            classification: 'wife'
+          }),
+          Relation.create({
+            related_from: p[1],
+            related_to: p[0],
+            classification: 'husband'
+          }),
+          Relation.create({
+            related_from: p[0],
+            related_to: p[2],
+            classification: 'son'
+          }),
+          Relation.create({
+            related_from: p[0],
+            related_to: p[3],
+            classification: 'daughter'
+          })
+        ]).then(Relation.count()).then(function(res) {
+          assert(res.length == 4);
+        })
+        .then(done).catch(done);
+    });
+    it('should validate relation querying', function(done){
+      Person.find(4).populate('relations').then(function(res){
+        // console.log(res);
+      }).then(done).catch(done);
     });
   });
 
