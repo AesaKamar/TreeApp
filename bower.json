@@ -1,0 +1,28 @@
+{
+  "name": "TreeApp",
+  "description": "a Sails application",
+  "main": "app.js",
+  "authors": [
+    "Aesa Kamar",
+    "Sheik Kamar"
+  ],
+  "license": "C",
+  "homepage": "https://github.com/AesaKamar/TreeApp",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-file-upload": "^2.2.0"
+  }
+}

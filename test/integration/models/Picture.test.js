@@ -3,6 +3,13 @@ const fs = require('fs');
 
 describe('PictureModel', function() {
 
+  // describe('#destroy()', function() {
+  //   it('should destroy all pictures', function(done) {
+  //     Picture.destroy({})
+  //       .then(done).catch(done);
+  //   });
+  // });
+
   describe('#create()', function() {
     it('should create a new Picture', function(done) {
       User.create({
@@ -37,7 +44,7 @@ describe('PictureModel', function() {
               done();
             } else {
               // It isn't accessible
-              assert(err===false);
+              assert(err === false);
             }
           });
 

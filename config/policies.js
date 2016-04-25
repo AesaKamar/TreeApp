@@ -35,9 +35,9 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  'IndexController': {
-    '*': 'isAuthenticated'
-  }
+  // 'IndexController': {
+  //   '*': 'isAuthenticated'
+  // }
 
 
 
