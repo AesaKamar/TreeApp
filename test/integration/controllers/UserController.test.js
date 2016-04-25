@@ -6,7 +6,7 @@ describe('UserController', function() {
   describe('#signup()', function() {
     it('should allow standard signup', function(done) {
       request(sails.hooks.http.app)
-        .post('/User')
+        .post('/user')
         .send({
           email: 'good@email.com',
           password: 'goodPass123'
@@ -14,7 +14,7 @@ describe('UserController', function() {
     });
     it('should not allow with bad password', function(done) {
       request(sails.hooks.http.app)
-        .post('/User')
+        .post('/user')
         .send({
           email: 'bad@email.com',
           password: '23'
@@ -22,7 +22,7 @@ describe('UserController', function() {
     });
     it('should not allow duplicate emails', function(done) {
       request(sails.hooks.http.app)
-        .post('/User')
+        .post('/user')
         .send({
           email: 'good@email.com',
           password: 'goodPass12345'

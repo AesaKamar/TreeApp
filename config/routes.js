@@ -23,38 +23,70 @@
 module.exports.routes = {
 
   /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+   * etc. depending on your default view engine) your home page.              *
+   *                                                                          *
+   * (Alternatively, remove this and add an `index.html` file in your         *
+   * `assets` directory)                                                      *
+   *                                                                          *
+   ***************************************************************************/
 
   // '/': {
   //   view: 'homepage'
   // },
 
   /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
-  'GET /home': {view: 'home/home'},
-  'GET /index' : 'IndexController.index',
-  'POST /User': 'UserController.create',
+   *                                                                          *
+   * Custom routes here...                                                    *
+   *                                                                          *
+   * If a request to a URL doesn't match any of the custom routes above, it   *
+   * is matched against Sails route blueprints. See `config/blueprints.js`    *
+   * for configuration options and examples.                                  *
+   *                                                                          *
+   ***************************************************************************/
 
-  'GET /login': { view: 'auth/login'},
+
+  // Special controller actions
+  // =============================================================
   'POST /login': 'AuthController.login',
   '/logout': 'AuthController.logout',
+  'GET /index': 'IndexController.index',
 
-  'GET /signup': {
-    view: 'auth/signup'
-  }
+  // Static views
+  // =============================================================
+  'GET /home': {view: 'home/home'},
+  'GET /login': {view: 'auth/login'},
+  'GET /signup': {view: 'auth/signup'},
+
+  // RESTful API endpoints
+  // =============================================================
+  // USER
+  'GET /user/:id':        'UserController.find',
+  'POST /user':           'UserController.create',
+  'PATCH /user/:id':      'UserController.update',
+  'DELETE /user/:id':     'UserController.destroy',
+  // PERSON
+  'GET /person/:id':      'PersonController.find',
+  'POST /person':         'PersonController.create',
+  'PATCH /person/:id':    'PersonController.update',
+  'DELETE /person/:id':   'PersonController.destroy',
+  // PICTURE
+  'GET /picture/:id':     'PictureController.find',
+  'POST /picture':        'PictureController.create',
+  'PATCH /picture/:id':   'PictureController.update',
+  'DELETE /picture/:id':  'PictureController.destroy',
+  // RELATION
+  'GET /relation/:id':    'RelationController.find',
+  'POST /relation':       'RelationController.create',
+  'PATCH /relation/:id':  'RelationController.update',
+  'DELETE /relation/:id': 'RelationController.destroy',
+  // TAG
+  'GET /tag/:id':         'TagController.find',
+  'POST /tag':            'TagController.create',
+  'PATCH /tag/:id':       'TagController.update',
+  'DELETE /tag/:id':      'TagController.destroy',
+
+
 
 };

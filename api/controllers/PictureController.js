@@ -6,5 +6,7 @@
  */
 
 module.exports = {
-
+  upload: function(){
+    
+  }
 };
