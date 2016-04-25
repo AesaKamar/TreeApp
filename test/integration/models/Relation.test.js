@@ -127,7 +127,7 @@ describe('RelationModel', function() {
     });
     it('should validate relation querying', function(done) {
       Person.findOne(4).populate('relations').then(function(res) {
-        console.log(res.relations);
+        // console.log(res.relations);
       }).then(done).catch(done);
     });
   });
