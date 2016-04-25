@@ -58,33 +58,34 @@ module.exports.routes = {
   'GET /home': {view: 'home/home'},
   'GET /login': {view: 'auth/login'},
   'GET /signup': {view: 'auth/signup'},
+  'GET /upload': {view: 'pictures/upload'},
 
   // RESTful API endpoints
   // =============================================================
   // USER
   'GET /user/:id':        'UserController.find',
   'POST /user':           'UserController.create',
-  'PATCH /user/:id':      'UserController.update',
+  'PUT /user/:id':        'UserController.update',
   'DELETE /user/:id':     'UserController.destroy',
   // PERSON
   'GET /person/:id':      'PersonController.find',
   'POST /person':         'PersonController.create',
-  'PATCH /person/:id':    'PersonController.update',
+  'PUT /person/:id':      'PersonController.update',
   'DELETE /person/:id':   'PersonController.destroy',
   // PICTURE
   'GET /picture/:id':     'PictureController.find',
   'POST /picture':        'PictureController.create',
-  'PATCH /picture/:id':   'PictureController.update',
+  'PUT /picture/:id':     'PictureController.update',
   'DELETE /picture/:id':  'PictureController.destroy',
   // RELATION
   'GET /relation/:id':    'RelationController.find',
   'POST /relation':       'RelationController.create',
-  'PATCH /relation/:id':  'RelationController.update',
+  'PUT /relation/:id':    'RelationController.update',
   'DELETE /relation/:id': 'RelationController.destroy',
   // TAG
   'GET /tag/:id':         'TagController.find',
   'POST /tag':            'TagController.create',
-  'PATCH /tag/:id':       'TagController.update',
+  'PUT /tag/:id':         'TagController.update',
   'DELETE /tag/:id':      'TagController.destroy',
 
 

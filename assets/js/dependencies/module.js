@@ -1,3 +1,3 @@
 (function() {
-  var app = angular.module('treeApp', []);
+  var app = angular.module('treeApp', ['angularFileUpload', 'ngResource']);
 })();
