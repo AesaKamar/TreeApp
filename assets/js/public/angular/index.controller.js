@@ -10,8 +10,8 @@
 
     // Member Variables
     // ===========================================
-    $scope.numNodes = 1000;
-    $scope.numEdges = 1000;
+    $scope.numNodes = 10;
+    $scope.numEdges = 30;
     $scope.graph = {
       nodes: [],
       edges: []

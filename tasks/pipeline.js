@@ -27,15 +27,17 @@ var jsFilesToInject = [
 
   // Load sails.io before everything else
   'js/dependencies/sails.io.js',
-  'js/dependencies/sigma*.js',
-  'js/dependencies/sigma_plugins/*.js',
+  'js/dependencies/sigma*.min.js',
+  'js/dependencies/sigma_plugins/*.min.js',
 
   // Dependencies like jQuery, or Angular are brought in here
-  'js/dependencies/**/*.js',
+  '/js/dependencies/module.js',
+  '/js/dependencies/ng-file-upload/ng-file-upload-all.min.js',
+
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
-  'js/**/*.js'
+  'js/public/**/*.js'
 ];
 
 
