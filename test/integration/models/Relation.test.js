@@ -3,6 +3,13 @@ var Promise = require('bluebird');
 
 describe('RelationModel', function() {
 
+  // describe('#destroy()', function() {
+  //   it('should destroy all relations', function(done) {
+  //     Relation.destroy({})
+  //       .then(done).catch(done);
+  //   });
+  // });
+
   describe('#create()', function() {
     it('should relate 2 People', function(done) {
       var person1, person2;
@@ -118,9 +125,9 @@ describe('RelationModel', function() {
         })
         .then(done).catch(done);
     });
-    it('should validate relation querying', function(done){
-      Person.find(4).populate('relations').then(function(res){
-        // console.log(res);
+    it('should validate relation querying', function(done) {
+      Person.findOne(4).populate('relations').then(function(res) {
+        console.log(res.relations);
       }).then(done).catch(done);
     });
   });
