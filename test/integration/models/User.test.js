@@ -1,15 +1,11 @@
 describe('UserModel', function() {
 
-  // describe('#destroy()', function() {
-  //   it('should destroy all users', function(done) {
-  //     User.destroy({})
-  //       .then(function(results) {
-  //         // some tests
-  //         done();
-  //       })
-  //       .catch(done);
-  //   });
-  // });
+  describe('#destroy()', function() {
+    it('should destroy all users', function(done) {
+      User.destroy({})
+        .then(done()).catch(done);
+    });
+  });
 
   describe('#create()', function() {
     it('should create a new User', function(done) {

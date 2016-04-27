@@ -4,6 +4,10 @@ describe('UserController', function() {
 
 
   describe('#signup()', function() {
+    it('should destroy all users', function(done) {
+      User.destroy({})
+        .then(done()).catch(done);
+    });
     it('should allow standard signup', function(done) {
       request(sails.hooks.http.app)
         .post('/user')
