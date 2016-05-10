@@ -3,36 +3,58 @@
     .module('treeApp')
     .controller('IndexController', IndexController);
 
-  IndexController.$inject = ['$scope', '$timeout', 'Person'];
+  IndexController.$inject = ['$scope', '$timeout', 'Person', 'Relation'];
 
-  function IndexController($scope, $timeout, Person) {
+  function IndexController($scope, $timeout, Person, Relation) {
 
 
     // Member Variables
     // ===========================================
-    $scope.numNodes = 200;
-    $scope.numEdges = 200;
-    $scope.graph = {
-      nodes: [],
-      edges: []
-    };
-    Person.get({id:4}).$promise.then(function(data){
-      $scope.person= data;
-      console.log(data);
-    });
+
 
     // Initialize sigma engine
     // ===========================================
     $scope.initializeSigma = function(graph) {
-      // Build the graph
-      // graph.nodes.push()
 
       $scope.Sigma = new sigma({
-        graph: graph,
         renderers: [{
           container: document.getElementById('GraphContainer'),
           type: 'webgl' // sigma.renderers.canvas works as well
         }]
+      });
+
+      // Build the graph
+      Person.get({
+        id: 4
+      }, function(data) {
+        $scope.Sigma.graph.addNode({
+          id: 'n' + String(data.id),
+          label: data.first_name,
+          size : 1,
+          x: Math.random(),
+          y: Math.random()
+        });
+        _.each(data.relations, function(person) {
+          $scope.Sigma.graph.addNode({
+            id: 'n' + String(person.id),
+            label: person.first_name,
+            size : 1,
+            x: Math.random(),
+            y: Math.random()
+          });
+        });
+      }).$promise.then(function(person) {
+        Relation.query({
+          related_from: person.id
+        }, function(data) {
+          _.each(data, function(relation) {
+            $scope.Sigma.graph.addEdge({
+              id:     "e" + String(relation.id),
+              source: "n" + String(relation.related_from),
+              target: "n" + String(relation.related_to)
+            });
+          });
+        });
       });
 
       // Allow custom shapes
@@ -49,8 +71,13 @@
 
       // Finally, let's ask our sigma instance to refresh:
       $scope.Sigma.refresh();
-      var timeout= 1000;
-      $timeout(function(){$scope.Sigma.stopForceAtlas2();}, timeout);
+      var timeout = 1000;
+      $timeout(function() {
+        console.log($scope.Sigma.graph.nodes());
+        console.log($scope.Sigma.graph.edges());
+        $scope.Sigma.refresh();
+        $scope.Sigma.stopForceAtlas2();
+      }, timeout);
     };
 
   }
