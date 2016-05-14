@@ -62,32 +62,12 @@ module.exports.routes = {
 
   // RESTful API endpoints
   // =============================================================
-  // USER
-  'GET /user/:id':        'UserController.find',
-  'POST /user':           'UserController.create',
-  'PUT /user/:id':        'UserController.update',
-  'DELETE /user/:id':     'UserController.destroy',
-  // PERSON
-  'GET /person/:id':      'PersonController.find',
-  'POST /person':         'PersonController.create',
-  'PUT /person/:id':      'PersonController.update',
-  'DELETE /person/:id':   'PersonController.destroy',
-  // PICTURE
-  'GET /picture/:id':     'PictureController.find',
-  'POST /picture':        'PictureController.create',
-  'PUT /picture/:id':     'PictureController.update',
-  'DELETE /picture/:id':  'PictureController.destroy',
-  // RELATION
-  'GET /relation/:id':    'RelationController.find',
-  'POST /relation':       'RelationController.create',
-  'PUT /relation/:id':    'RelationController.update',
-  'DELETE /relation/:id': 'RelationController.destroy',
-  // TAG
-  'GET /tag/:id':         'TagController.find',
-  'POST /tag':            'TagController.create',
-  'PUT /tag/:id':         'TagController.update',
-  'DELETE /tag/:id':      'TagController.destroy',
-
+  // These are all exposed natively by blueprints
+  // GET /resource?where=something  : Model.find({where:something})
+  // GET /resource/:id              : Model.find(id)
+  // POST /resource                 : Model.create
+  // PUT /resource/:id              : Model.update
+  // DELETE /resource/:id           : Model.destroy
 
 
 };

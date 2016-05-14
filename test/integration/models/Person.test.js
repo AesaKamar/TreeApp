@@ -2,12 +2,12 @@ const assert = require('assert');
 
 describe('PersonModel', function() {
 
-  // describe('#destroy()', function() {
-  //   it('should destroy all people', function(done) {
-  //     Person.destroy({})
-  //       .then(done).catch(done);
-  //   });
-  // });
+  describe('#destroy()', function() {
+    it('should destroy all people', function(done) {
+      Person.destroy({})
+        .then(done()).catch(done);
+    });
+  });
 
   describe('#create()', function() {
     it('should create a new Person', function(done) {

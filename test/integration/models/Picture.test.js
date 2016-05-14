@@ -3,12 +3,12 @@ const fs = require('fs');
 
 describe('PictureModel', function() {
 
-  // describe('#destroy()', function() {
-  //   it('should destroy all pictures', function(done) {
-  //     Picture.destroy({})
-  //       .then(done).catch(done);
-  //   });
-  // });
+  describe('#destroy()', function() {
+    it('should destroy all pictures', function(done) {
+      Picture.destroy({})
+        .then(done()).catch(done);
+    });
+  });
 
   describe('#create()', function() {
     it('should create a new Picture', function(done) {

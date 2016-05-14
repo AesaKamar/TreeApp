@@ -20,5 +20,5 @@ module.exports = {
         // console.log(res.status());
         return (err ? res.json(400, err): res.json(202,created) );
       });
-  }
+  },
 };

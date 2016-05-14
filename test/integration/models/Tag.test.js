@@ -1,12 +1,12 @@
 const assert = require('assert');
 describe('TagModel', function() {
 
-  // describe('#destroy()', function() {
-  //   it('should destroy all tags', function(done) {
-  //     Tag.destroy({})
-  //       .then(done).catch(done);
-  //   });
-  // });
+  describe('#destroy()', function() {
+    it('should destroy all tags', function(done) {
+      Tag.destroy({})
+        .then(done()).catch(done);
+    });
+  });
 
   describe('#create()', function() {
     it('should create a new Tag and associate picture with person', function(done) {
