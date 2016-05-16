@@ -59,6 +59,7 @@ module.exports.routes = {
   'GET /login': {view: 'auth/login'},
   'GET /signup': {view: 'auth/signup'},
   'GET /upload': {view: 'pictures/upload'},
+  'GET /szktest1': {view: 'szktest/TestAjax2'},
 
   // RESTful API endpoints
   // =============================================================

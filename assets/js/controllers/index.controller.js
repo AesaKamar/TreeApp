@@ -16,6 +16,7 @@
     // ===========================================
     $scope.initializeSigma = function(graph) {
 
+      $scope.date = Date.now();
       $scope.Sigma = new sigma({
         renderers: [{
           container: document.getElementById('GraphContainer'),
