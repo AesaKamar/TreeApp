@@ -3,9 +3,9 @@
     .module('treeApp')
     .controller('HomeController', HomeController);
 
-  HomeController.$inject = [];
+  HomeController.$inject = ['Picture', 'User'];
 
-  function HomeController() {
-
+  function HomeController(Picture, User) {
+    
   }
 })();

@@ -32,7 +32,7 @@ var jsFilesToInject = [
 
   // Dependencies like jQuery, or Angular are brought in here
   '/js/dependencies/module.js',
-  '/js/dependencies/angular-file-upload/dist/*.min.js',
+  '/js/dependencies/ng-file-upload/*.min.js',
   '/js/services/*.js',
 
 
