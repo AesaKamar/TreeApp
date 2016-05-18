@@ -5,8 +5,10 @@
       return $resource('/picture/:picture',
       {picture: '@picture'},
       {
+        // Ammend save method to make post as FormData encoded
+        // to support native file uploading
         save: {
-          method: 'POST', // this method issues a PUT request
+          method: 'POST',
           headers: {'Content-Type':undefined, enctype: 'multipart/form-data'},
           transformRequest: function(data){
             var fd = new FormData();

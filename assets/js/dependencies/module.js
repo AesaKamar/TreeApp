@@ -1,4 +1,4 @@
 (function() {
   var app = angular.module('treeApp',
-  ['ngFileUpload', 'ngResource']);
+  ['ngFileUpload', 'ngResource', 'angular-growl']);
 })();

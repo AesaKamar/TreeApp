@@ -33,6 +33,7 @@ var jsFilesToInject = [
   // Dependencies like jQuery, or Angular are brought in here
   '/js/dependencies/module.js',
   '/js/dependencies/ng-file-upload/*.min.js',
+  '/js/dependencies/angular-growl-v2/build.*.min.*',
   '/js/services/*.js',
 
 

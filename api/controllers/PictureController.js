@@ -17,15 +17,13 @@ module.exports = {
         pictureParams.file_path = randomstring.generate(7);
 
         // Upload the file to user directory indicated by owner_id
-        console.log(pictureParams);
-        req.file('file1').upload(function(err, files) {
+        req.file('fileData').upload(function(err, files) {
             if (err) {
                 console.log(err);
                 return res.json(400, err);
             }
-            console.log(files);
             if (files.length <1){
-              return res.json(400, {file1: "no file data"});
+              return res.json(400, {fileData: "no file data found"});
             }
             var sourceFile = files[0].fd;
             var destinationFile = path.join('private_images', pictureParams.owner.toString(), pictureParams.file_path);
