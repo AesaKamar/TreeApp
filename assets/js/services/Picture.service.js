@@ -9,7 +9,7 @@
         // to support native file uploading
         save: {
           method: 'POST',
-          headers: {'Content-Type':undefined, enctype: 'multipart/form-data'},
+          headers: {'Content-Type': undefined , enctype: 'multipart/form-data'},
           transformRequest: function(data){
             var fd = new FormData();
             angular.forEach(data, function(value, key) {

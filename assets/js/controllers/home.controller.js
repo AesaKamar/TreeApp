@@ -15,7 +15,6 @@
 
 
     $scope.uploadPicture = function(picture){
-      console.log(picture);
       Picture.save(picture,
         function(data){
           console.log(data);

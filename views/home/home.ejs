@@ -2,9 +2,9 @@
 
   <form name="form">
     Single Image with validations
-    <div class="btn btn-info" ngf-select ng-model="picture.file1" name="file1" ngf-pattern="'image/*'"
+    <div class="btn btn-info" ngf-select ng-model="picture.fileData" name="fileData" ngf-pattern="'image/*'"
       ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div>
-      {{picture.file1}}
+      {{picture.fileData}}
     <button class="btn btn-submit" type="submit" ng-click="uploadPicture(picture)">submit</button>
   </form>
 </div>
