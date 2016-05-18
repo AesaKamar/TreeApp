@@ -1,18 +1,20 @@
 (function() {
   angular
     .module('treeApp')
-    .factory('Picture', function($resource) {
-      return $resource('/picture/:picture', {
-        picture: "@picture",
+    .factory('Picture', function($log, $resource) {
+      return $resource('/picture/:picture',
+      {picture: '@picture'},
+      {
         save: {
-          method: 'POST',
-          transformRequest: angular.identity,
-          headers: { 'Content-Type': undefined }
-        },
-        create: {
-          method: 'POST',
-          transformRequest: angular.identity,
-          headers: { 'Content-Type': undefined }
+          method: 'POST', // this method issues a PUT request
+          headers: {'Content-Type':undefined, enctype: 'multipart/form-data'},
+          transformRequest: function(data){
+            var fd = new FormData();
+            angular.forEach(data, function(value, key) {
+                fd.append(key, value);
+            });
+            return fd;
+          }
         }
       });
     });
