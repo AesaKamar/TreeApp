@@ -31,7 +31,8 @@ module.exports = {
       var obj = this.toObject();
       return obj;
     },
-    beforeCreate: function(user, cb) {
+    beforeCreate: function(values, cb) {
+      console.log(values);
       //Make sure filename is checked out
     }
   }
