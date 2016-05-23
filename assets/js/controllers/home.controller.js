@@ -15,6 +15,7 @@
 
     $scope.getPicture = {};
     Picture.get({id:2}, function(data){
+      console.log(data);
       $scope.getPicture = data;
     });
 
