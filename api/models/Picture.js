@@ -18,6 +18,12 @@ module.exports = {
       required: true,
       unique: true
     },
+    // This describes the original file extension.
+    // All served imgages are converted to PNG
+    file_extension:{
+      type: 'string',
+      required: true,
+    },
     owner: {
       model: 'user',
       required: true,

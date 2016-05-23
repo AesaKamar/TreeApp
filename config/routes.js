@@ -69,6 +69,7 @@ module.exports.routes = {
   // POST /resource                 : Model.create
   // PUT /resource/:id              : Model.update
   // DELETE /resource/:id           : Model.destroy
+  "GET /image/:id": 'PictureController.image',
 
 
 };
