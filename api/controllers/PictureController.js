@@ -87,12 +87,9 @@ module.exports = {
 
             fs.exists(path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg'), function(exists) {
                 // handle result
-                console.log(path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg'));
                 res.attachment(path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg'));
-                // res.send(200, matchingRecord);
-                res.end('hello world', 'UTF-8');
+                res.download(path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg'));
             });
-            console.log('FAILURE');
         });
     }
 };

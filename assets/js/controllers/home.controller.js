@@ -13,15 +13,17 @@
       });
     });
 
-    $scope.getPicture = {};
-    Picture.get({id:2}, function(data){
-      $scope.getPicture = data;
-    });
+    $scope.get_picture = {};
 
     $scope.uploadPicture = function(picture){
+      console.log(picture);
       Picture.save(picture,
-        function(data){
-          console.log(data);
+        function(res1){
+          // console.log(res1);
+          Picture.get({id:res1.picture.id}, function(res2){
+             console.log(res2);
+            $scope.get_picture = res2;
+          });
         },
       function(err){
         console.log(err);
