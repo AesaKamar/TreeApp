@@ -18,6 +18,7 @@ describe('PictureModel', function() {
       }).then(function(res1) {
         Picture.create({
             file_path: 'private_images/bananas.jpg',
+            file_extension: 'jpg',
             owner: res1
           })
           .then(function(results) {

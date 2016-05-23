@@ -13,6 +13,10 @@
       });
     });
 
+    $scope.getPicture = {};
+    Picture.get({id:2}, function(data){
+      $scope.getPicture = data;
+    });
 
     $scope.uploadPicture = function(picture){
       Picture.save(picture,
