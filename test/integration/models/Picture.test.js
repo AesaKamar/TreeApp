@@ -17,7 +17,7 @@ describe('PictureModel', function() {
         password: 'password123'
       }).then(function(res1) {
         Picture.create({
-            file_path: 'private_images/bananas.jpg',
+            file_path: res1.id + '/bananas',
             file_extension: 'jpg',
             owner: res1
           })
@@ -32,27 +32,27 @@ describe('PictureModel', function() {
     });
   });
 
-  describe('vadidateFilePath', function() {
-    it('should validate the existance of a file in private_images', function(done) {
-      Picture.findOne({
-          file_path: 'private_images/bananas.jpg',
-        })
-        .then(function(results) {
-          // some tests
-          fs.access(results.file_path, fs.F_OK, function(err) {
-            if (!err) {
-              // Do something
-              done();
-            } else {
-              // It isn't accessible
-              assert(err === false);
-            }
-          });
-
-        })
-        .catch(done);
-    });
-  });
+  // describe('vadidateFilePath', function() {
+  //   it('should validate the existance of a file in private_images', function(done) {
+  //     Picture.findOne({
+  //         file_path: 'private_images/bananas.jpg',
+  //       })
+  //       .then(function(results) {
+  //         // some tests
+  //         fs.access(results.file_path, fs.F_OK, function(err) {
+  //           if (!err) {
+  //             // Do something
+  //             done();
+  //           } else {
+  //             // It isn't accessible
+  //             assert(err === false);
+  //           }
+  //         });
+  //
+  //       })
+  //       .catch(done);
+  //   });
+  // });
 
 
   describe('#find()', function() {
