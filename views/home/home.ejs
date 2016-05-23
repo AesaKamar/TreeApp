@@ -9,8 +9,7 @@
   </form>
 
   <div class="row">
-    <span>HELLO</span>
-    {{getPicture}}
-    <img src="{{'data:image/jpg;base64' + getPicture.data }}" alt="imageData" />
+    {{get_picture.file_path}}
+    <img ng-src="{{get_picture.file_source}}" alt="imageData" />
   </div>
 </div>

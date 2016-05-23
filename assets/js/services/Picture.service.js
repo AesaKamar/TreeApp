@@ -25,19 +25,7 @@
                     method: 'GET',
                     transformResponse: function(data) {
                         data = angular.fromJson(data);
-                        console.log(data);
-                        // Simple GET request example:
-                        $http({
-                            method: 'GET',
-                            url: '/image/' + data.id
-                        }).then(function successCallback(response ) {
-                            // this callback will be called asynchronously
-                            // when the response is available
-                            data.fileData = response.data;
-                        }, function errorCallback( response ) {
-                            // called asynchronously if an error occurs
-                            // or server returns response with an error status.
-                        });
+                        data.file_source = 'image/' + data.id;
                         return data;
                     }
                 }
