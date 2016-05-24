@@ -2,8 +2,11 @@
   angular
     .module('treeApp')
     .factory('User', function($resource) {
-      return $resource('/user/:user', {
+      return $resource('/user/:id', {
         user: "@user"
+      },
+      {
+      	update: { method: 'PUT'},
       });
     });
 })();

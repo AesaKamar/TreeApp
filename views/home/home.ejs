@@ -9,22 +9,29 @@
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	          <h4 class="modal-title">Modal Header</h4>
+	          <h4 class="modal-title">Picture Description:</h4>
+	          <textarea rows="2" cols="50" name="PictureDescription" ng-maxlength="100" placeholder="Describe what the picture is about or its content" ng-model="all_pictures[currentImageIndex].description">
+	          </textarea>
 	        </div>
 	        <div class="modal-body">
-	          <img ng-src="{{currentlyFocusedImage.file_source}}" />
+	          <img ng-src="{{'image/' + all_pictures[currentImageIndex].id}}" />
 	        </div>
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	          <button type="button" class="btn btn-default" data-dismiss="modal" 
+	          ng-click="updatePicture(all_pictures[currentImageIndex])">Update</button>
+	        	<button type="button" class="btn btn-default" data-dismiss="modal"
+	        	ng-click="deletePicture(all_pictures[currentImageIndex])">Delete</button>
+	          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
+	        
 	      </div>
 	      
 	    </div>
 	  </div>
 	
 	<div class='row' ng-repeat="picture in all_pictures track by $index">
-		<div ng-click="getImageAndOverlay(picture, $index)">
-			<div class='col-md-2'>{{picture.file_path}}</div>
+		<div ng-click="summonModal($index)">
+			<div class="col-md-2">{{picture.file_path}}</div>
 			<img class='col-md-2 cssImg1' ng-src="{{'image/' + picture.id}}" />
 			<div class="col-md-8 container">
 				<div class="row container"><h2 class="col-md-6">Description:</h2><span class="col-md-6" ng-bind="picture.description"></span></div>

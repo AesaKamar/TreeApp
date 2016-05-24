@@ -2,8 +2,8 @@
     angular
         .module('treeApp')
         .factory('Picture', function($http, $resource) {
-            return $resource('/picture/:picture', {
-                picture: '@picture'
+            return $resource('/picture/:id', {
+                picture: '@picture',
             }, {
                 // Ammend save method to make post as FormData encoded
                 // to support native file uploading
@@ -21,6 +21,7 @@
                         return fd;
                     }
                 },
+                update: { method: 'PUT'},
                 get: {
                     method: 'GET',
                     transformResponse: function(data) {
