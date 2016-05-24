@@ -2,8 +2,11 @@
   angular
     .module('treeApp')
     .factory('Relation', function($resource) {
-      return $resource('/relation/:relation', {
+      return $resource('/relation/:id', {
         relation: "@relation"
+      },
+      {
+      	update: { method: 'PUT'},
       });
     });
 })();

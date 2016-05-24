@@ -1,33 +1,51 @@
 (function() {
-  angular
-    .module('treeApp')
-    .controller('HomeController', HomeController);
+    angular
+        .module('treeApp')
+        .controller('HomeController', HomeController);
 
-  HomeController.$inject = ['$scope', 'Picture', 'User'];
+    HomeController.$inject = ['$scope', 'Picture', 'User', 'growl'];
 
-  function HomeController($scope, Picture, User) {
-    User.get({id:5}, function(user){
-      $scope.picture = new Picture({
-        owner: user.id,
-        description: "A sample upload"
-      });
-    });
+    function HomeController($scope, Picture, User, growl) {
 
-    $scope.get_picture = {};
+        // Initializers
+        // ===================================
+        var owner_id;
+        User.get({
+            id: 6
+        }, function(user) {
+          owner_id = user.id;
+            $scope.picture = new Picture({
+                owner: user.id,
+                description: "A sample upload"
+            });
+        });
 
-    $scope.uploadPicture = function(picture){
-      console.log(picture);
-      Picture.save(picture,
-        function(res1){
-          // console.log(res1);
-          Picture.get({id:res1.picture.id}, function(res2){
-             console.log(res2);
-            $scope.get_picture = res2;
-          });
-        },
-      function(err){
-        console.log(err);
-      });
-    };
-  }
+        $scope.currentImageIndex = [];
+        $scope.all_pictures = [];
+        
+
+        Picture.query({
+            owner: owner_id
+        }, function(pictures) {
+            $scope.all_pictures = pictures;
+        });
+
+
+        // Methods
+        // ====================================
+        $scope.summonModal= function(index){
+          $scope.currentImageIndex = index;
+          $("#myModal").modal();
+        };
+
+        $scope.updatePicture = function(picture){
+          Picture.update({id:picture.id}, picture);
+        };
+
+        $scope.deletePicture = function(picture){
+          Picture.delete({id:picture.id});
+        };
+
+
+    }
 })();
