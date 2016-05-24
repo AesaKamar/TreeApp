@@ -40,7 +40,7 @@ module.exports = {
                 mkdirp: true
             }, function(err) {
                 if (err) {
-                    console.log(err);
+                    return res.json(400, err);
                 } else {
                     // create thumbnail of original upload
                     im.convert(
@@ -64,7 +64,7 @@ module.exports = {
                 }
             });
             // Use fs to copy file and delete tmp location\
-            if (err) return res.serverError(err);
+            if (err) return res.json(500, err);
         });
         //  console.log(req.files'file1'));
     },
