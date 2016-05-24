@@ -7,7 +7,7 @@
 
 module.exports = {
   _config: {
-    populate: true
+    populate: false
   }
   // find: function(req, res) {
   //   //This is what the action will do
