@@ -79,29 +79,32 @@
 
             // Build the graph
             // Start with person 4
-            addPersonToGraph(4, $scope.Sigma.graph, 3, 0);
+            addPersonToGraph(_.random(0, 100, false), $scope.Sigma.graph, 4, 0).then(function(){
+              console.log('starting');
+              // Force directed graph.
+              // Barnes-Hut works best at scale, bad for low density
+              $scope.Sigma.refresh();
+              $scope.Sigma.startForceAtlas2({
+                  worker: true,
+                  barnesHutOptimize: false
+              });
+
+              // Finally, let's ask our sigma instance to refresh:
+              $scope.Sigma.refresh();
+              var timeout = 5000;
+              $timeout(function() {
+                  console.log($scope.Sigma.graph.nodes());
+                  console.log($scope.Sigma.graph.edges());
+                  $scope.Sigma.refresh();
+                  $scope.Sigma.stopForceAtlas2();
+              }, timeout);
+            });
 
             // Allow custom shapes
             // FIXME currently disabled because there is no support with webGL renderer
             // CustomShapes.init($scope.Sigma);
             // $scope.Sigma.refresh();
 
-            // Force directed graph.
-            // Barnes-Hut works best at scale, bad for low density
-            $scope.Sigma.startForceAtlas2({
-                worker: true,
-                barnesHutOptimize: false
-            });
-
-            // Finally, let's ask our sigma instance to refresh:
-            $scope.Sigma.refresh();
-            var timeout = 1000;
-            $timeout(function() {
-                console.log($scope.Sigma.graph.nodes());
-                console.log($scope.Sigma.graph.edges());
-                $scope.Sigma.refresh();
-                $scope.Sigma.stopForceAtlas2();
-            }, timeout);
         };
 
     }
