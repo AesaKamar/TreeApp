@@ -3,13 +3,6 @@ var Promise = require('bluebird');
 
 describe('RelationModel', function() {
 
-  describe('#destroy()', function() {
-    it('should destroy all relations', function(done) {
-      Relation.destroy({})
-        .then(done()).catch(done);
-    });
-  });
-
   describe('#create()', function() {
     it('should relate 2 People', function(done) {
       var person1, person2;
