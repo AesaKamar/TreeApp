@@ -6,5 +6,7 @@
  */
 
 module.exports = {
-
+  _config: {
+    populate: false
+  }
 };

@@ -37,7 +37,7 @@ module.exports.http = {
       'startRequestTimer',
       'cookieParser',
       'session',
-      // 'requestLogger',
+      'requestLogger',
       'passportInit',
       'passportSession',
       'myRequestLogger',
@@ -59,10 +59,10 @@ module.exports.http = {
      *                                                                           *
      ****************************************************************************/
 
-    // requestLogger: function (req, res, next) {
-    //     console.log("Requested :: ", req.method, req.url);
-    //     return next();
-    // }
+    requestLogger: function (req, res, next) {
+        console.log("Requested :: ", req.method, req.url);
+        return next();
+    }
 
 
     /***************************************************************************
