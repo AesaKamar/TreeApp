@@ -2,6 +2,14 @@ var request = require('supertest');
 var rq = require('request');
 const fs = require('fs');
 const assert = require('assert');
+var faker = require('faker');
+var randomstring = require('randomstring');
+
+var download = function(uri, filename, callback) {
+    rq.head(uri, function(err, res, body) {
+        rq(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+    });
+};
 
 describe('PictureController', function() {
 
@@ -13,11 +21,6 @@ describe('PictureController', function() {
         });
 
         it('should download an image from Google', function(done) {
-            var download = function(uri, filename, callback) {
-                rq.head(uri, function(err, res, body) {
-                    rq(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
-                });
-            };
             // Check existance of directory
             var dir = 'private_images/0';
             if (!fs.existsSync(dir)) {
@@ -40,18 +43,40 @@ describe('PictureController', function() {
                     password: 'password123'
                 })
                 .then(function() {
-                  request(sails.hooks.http.app)
-                    .post('/picture')
-                    .set('Content-Type', 'multipart/form-data')
-                    .field('owner', 4)
-                    .field('description', "Mountains by Google")
-                    .field('file_path', 'RandomFilePath')
-                    .attach('fileData', 'private_images/0/mountains.jpeg')
-                    .send().expect(201, done);
+                    request(sails.hooks.http.app)
+                        .post('/picture')
+                        .type('form')
+                        .set('Content-Type', 'multipart/form-data')
+                        .field('owner', 4)
+                        .field('description', "Mountains by Google")
+                        .field('file_path', randomstring.generate(7))
+                        .attach('fileData', 'private_images/0/mountains.jpeg')
+                        .send().expect(201);
+                }).then(function(){
+                  Picture.find({description: "Mountains by Google"}, function(res){
+                    console.log(res);
+
+                  });
                 })
+                .then(done())
                 .catch(done);
         });
 
     });
 
+    // describe('bulk create', function() {
+    //     it('should create 100 picture entities', function(done) {
+    //       var promise_array = [];
+    //       _.times(10,function(){
+    //         request(sails.hooks.http.app)
+    //             .post('/picture')
+    //             .set('Content-Type', 'multipart/form-data')
+    //             .field('owner', 4)
+    //             .field('description', faker.name.findName())
+    //             .field('file_path', randomstring.generate(7))
+    //             .attach('fileData', 'private_images/0/mountains.jpeg')
+    //             .send().expect(201, done);
+    //       });
+    //     });
+    // });
 });

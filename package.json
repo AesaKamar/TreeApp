@@ -35,6 +35,7 @@
     "passport-local": "~0.1.6",
     "randomstring": "^1.1.4",
     "rc": "1.0.1",
+    "rmdir": "^1.2.0",
     "sails": "~0.12.3",
     "sails-disk": "~0.10.9",
     "sails-postgresql": "^0.12.1",

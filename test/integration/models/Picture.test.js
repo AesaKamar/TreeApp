@@ -1,5 +1,7 @@
 const assert = require('assert');
 const fs = require('fs');
+var Promise = require('bluebird');
+var faker = require('faker');
 
 describe('PictureModel', function() {
 
@@ -14,6 +16,28 @@ describe('PictureModel', function() {
     it('should create a new Picture', function(done) {
       User.create({
         email: 'pictureUser@email.com',
+        password: 'password123'
+      }).then(function(res1) {
+        Picture.create({
+            file_path: res1.id + '/bananas',
+            file_extension: 'jpg',
+            owner: res1
+          })
+          .then(function(results) {
+            // some tests
+            assert(results.owner == res1.id);
+            done();
+          })
+          .catch(done);
+      });
+
+    });
+  });
+
+  describe('bulk create', function() {
+    it('should create several fake pictures', function(done) {
+      User.create({
+        email: 'pictureFakerUser@email.com',
         password: 'password123'
       }).then(function(res1) {
         Picture.create({
