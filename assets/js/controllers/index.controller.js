@@ -3,9 +3,9 @@
         .module('treeApp')
         .controller('IndexController', IndexController);
 
-    IndexController.$inject = ['$scope', '$timeout', 'Person', 'Relation'];
+    IndexController.$inject = ['$q', '$scope', '$timeout', 'Person', 'Relation'];
 
-    function IndexController($scope, $timeout, Person, Relation) {
+    function IndexController($q, $scope, $timeout, Person, Relation) {
 
 
         // Member Variables
@@ -34,7 +34,9 @@
         }
 
         // Recursively add people to graph
-        function addPersonToGraph(person_id, sigma_engine, max_degree, current_degree) {
+        var search_promises = [];
+
+        function addPersonToGraph(person_id, sigma_engine, max_degree, current_degree, promises) {
             return new Promise(function(resolve, reject) {
                 Person.get({
                     id: person_id
@@ -50,12 +52,12 @@
 
                             // If not max degree and related_to person not already in graph
                             if (current_degree < max_degree && sigma_engine.nodes('n' + String(relation.related_to)) === undefined) {
-                                addPersonToGraph(relation.related_to, sigma_engine, max_degree, current_degree + 1).then(function() {
+                                promises.push(addPersonToGraph(relation.related_to, sigma_engine, max_degree, current_degree + 1, promises).then(function() {
                                     // Add the relation if edge not already in the graph
                                     if (sigma_engine.edges('e' + String(relation.id)) === undefined) {
                                         sigma_engine.addEdge(relationToEdge(relation));
                                     }
-                                });
+                                }));
                             }
                         });
                         resolve();
@@ -79,8 +81,10 @@
 
             // Build the graph
             // Start with person 4
-            addPersonToGraph(_.random(0, 100, false), $scope.Sigma.graph, 4, 0).then(function(){
-              console.log('starting');
+            addPersonToGraph(_.random(0, 100, false), $scope.Sigma.graph, 4, 0, search_promises).then(function() {
+            });
+            $q.all(search_promises).then(function(){
+
               // Force directed graph.
               // Barnes-Hut works best at scale, bad for low density
               $scope.Sigma.refresh();
@@ -91,7 +95,7 @@
 
               // Finally, let's ask our sigma instance to refresh:
               $scope.Sigma.refresh();
-              var timeout = 5000;
+              var timeout = 2000;
               $timeout(function() {
                   console.log($scope.Sigma.graph.nodes());
                   console.log($scope.Sigma.graph.edges());
