@@ -23,7 +23,7 @@ describe('PictureController', function() {
             if (!fs.existsSync(dir)) {
                 fs.mkdirSync(dir);
             }
-            fs.exists('./www/index.html', function(exists) {
+            fs.exists('private_images/0/mountains.jpeg', function(exists) {
                 if (exists) {
                     fs.unlink('private_images/0/mountains.jpeg');
                 }
