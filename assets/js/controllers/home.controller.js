@@ -38,12 +38,16 @@
           $("#myModal").modal();
         };
 
-        $scope.updatePicture = function(picture){
-          Picture.update({id:picture.id}, picture);
+        $scope.updatePicture = function(index){
+          Picture.update({id:$scope.all_pictures[index].id}, $scope.all_pictures[index], function(res){
+            $scope.all_pictures[index] = res;
+          });
         };
 
-        $scope.deletePicture = function(picture){
-          Picture.delete({id:picture.id});
+        $scope.deletePicture = function(index){
+          Picture.delete({id:$scope.all_pictures[index].id},function(res){
+            $scope.all_pictures[index] = res;
+          });
         };
 
 
