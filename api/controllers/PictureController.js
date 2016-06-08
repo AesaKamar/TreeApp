@@ -84,11 +84,12 @@ module.exports = {
         Picture.findOne(pictureParams.id).then(function(data) {
             matchingRecord = data;
             // Check validations on image read later!
-
-            fs.exists(path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg'), function(exists) {
+            var fileLocation = path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg');
+            fs.exists(fileLocation, function(exists) {
                 // handle result
-                res.attachment(path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg'));
-                res.download(path.join('private_images', String(matchingRecord.owner), matchingRecord.file_path + '.converted.jpg'));
+                res.setHeader('Content-disposition', 'attachment; filename=' + fileLocation);
+                res.setHeader('Content-type', 'image/jpg');
+                res.download(fileLocation);
             });
         });
     }
