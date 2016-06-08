@@ -4,7 +4,7 @@
 	 <!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">
 	    <div class="modal-dialog">
-	    
+
 	      <!-- Modal content-->
 	      <div class="modal-content">
 	        <div class="modal-header">
@@ -14,35 +14,31 @@
 	          </textarea>
 	        </div>
 	        <div class="modal-body">
-	          <img ng-src="{{'image/' + all_pictures[currentImageIndex].id}}" />
+	          <img ng-src="image/{{all_pictures[currentImageIndex].id}}" />
 	        </div>
 	        <div class="modal-footer">
-	          <button type="button" class="btn btn-default" data-dismiss="modal" 
+	          <button type="button" class="btn btn-default" data-dismiss="modal"
 	          ng-click="updatePicture(all_pictures[currentImageIndex])">Update</button>
 	        	<button type="button" class="btn btn-default" data-dismiss="modal"
 	        	ng-click="deletePicture(all_pictures[currentImageIndex])">Delete</button>
 	          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
-	        
+
 	      </div>
-	      
 	    </div>
 	  </div>
-	
-	<div class='row' ng-repeat="picture in all_pictures track by $index">
+
+	<div class="row" ng-repeat="picture in all_pictures track by $index">
 		<div ng-click="summonModal($index)">
 			<div class="col-md-2">{{picture.file_path}}</div>
-			<img class='col-md-2 cssImg1' ng-src="{{'image/' + picture.id}}" />
+			<img  height="100" width="100" ng-src="image/{{picture.id}}" />
 			<div class="col-md-8 container">
 				<div class="row container"><h2 class="col-md-6">Description:</h2><span class="col-md-6" ng-bind="picture.description"></span></div>
 				<div class="row"><h3>Created:</h3> {{picture.createdAt}}</div>
 				<div class="row"><h4>Updated:</h4> {{picture.updatedAt}}</div>
-			
+
 			</div>
 		</div>
 	</div>
 
 </div>
-
-
- 
