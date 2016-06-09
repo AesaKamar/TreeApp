@@ -18,9 +18,9 @@
 	        </div>
 	        <div class="modal-footer">
 	          <button type="button" class="btn btn-default" data-dismiss="modal"
-	          ng-click="updatePicture(all_pictures[currentImageIndex])">Update</button>
+	          ng-click="updatePicture(currentImageIndex)">Update</button>
 	        	<button type="button" class="btn btn-default" data-dismiss="modal"
-	        	ng-click="deletePicture(all_pictures[currentImageIndex])">Delete</button>
+	        	ng-click="deletePicture(currentImageIndex)">Delete</button>
 	          	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        </div>
 
@@ -29,14 +29,15 @@
 	  </div>
 
 	<div class="row" ng-repeat="picture in all_pictures track by $index">
-		<div ng-click="summonModal($index)">
+
+		<div  ng-click="summonModal($index)">
 			<div class="col-md-2">{{picture.file_path}}</div>
 			<img  height="100" width="100" ng-src="image/{{picture.id}}" />
 			<div class="col-md-8 container">
 				<div class="row container"><h2 class="col-md-6">Description:</h2><span class="col-md-6" ng-bind="picture.description"></span></div>
 				<div class="row"><h3>Created:</h3> {{picture.createdAt}}</div>
 				<div class="row"><h4>Updated:</h4> {{picture.updatedAt}}</div>
-
+				<div ng-show="picture.delete_flag" class="deletedPic"> Record Tagged for Deletion.</div>
 			</div>
 		</div>
 	</div>

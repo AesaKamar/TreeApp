@@ -79,6 +79,33 @@ module.exports = {
             return res.send(200, matchingRecord);
         });
     },
+    destroy: function(req, res) {
+        // Get the parameters of the request
+        var pictureParams = req.params.all();
+        
+        // Find the matching picture resource
+        Picture.update({id: pictureParams.id},{delete_flag: true,}).exec(function(err, deleted){
+            if(err){
+                return res.send(400,err);
+            }
+            return res.send(200,deleted[0]); // return deleted record, change display in view
+        });
+    },
+    
+    update: function(req, res) {
+        // Get the parameters of the request
+        var pictureParams = req.params.all();
+        pictureParams.delete_flag = false;
+        
+        // Find the matching picture resource
+        Picture.update({id: pictureParams.id},pictureParams).exec(function(err, updated){
+            if(err){
+                return res.send(400,err);
+            }
+            return res.send(200,updated[0]); // return updated record, change display in view
+        });
+    },
+
     image: function(req, res) {
         var pictureParams = req.params.all();
         Picture.findOne(pictureParams.id).then(function(data) {
