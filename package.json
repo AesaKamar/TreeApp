@@ -31,6 +31,7 @@
     "include-all": "~0.1.6",
     "mocha": "latest",
     "mv": "^2.1.1",
+    "node-schedule": "^1.1.0",
     "passport": "~0.1.17",
     "passport-local": "~0.1.6",
     "randomstring": "^1.1.4",
