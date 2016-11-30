@@ -1,5 +1,5 @@
 {
-    "name": "CambridgeHomes",
+    "name": "Ginko",
     "private": true,
     "version": "0.0.0",
     "description": "a Sails application",
@@ -8,7 +8,7 @@
         "assert": "^1.4.1",
         "async": "^2.1.4",
         "async-q": "latest",
-        "bcrypt": "^0.8.7",
+        "bcrypt": "latest",
         "bcrypt-nodejs": "latest",
         "bluebird": "^3.4.6",
         "chai": "latest",
@@ -44,7 +44,7 @@
     },
     "scripts": {
         "debug": "node debug app.js",
-        "start": "node app.js",
+        "start": "nodemon app.js",
         "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js"
     },
     "main": "app.js",
