@@ -1,8 +1,8 @@
 {
     "name": "Ginko",
     "private": true,
-    "version": "0.0.0",
-    "description": "a Sails application",
+    "version": "0.0.1",
+    "description": "A family tree graphing application",
     "keywords": [],
     "dependencies": {
         "assert": "^1.4.1",
@@ -35,7 +35,7 @@
     "main": "app.js",
     "repository": {
         "type": "git",
-        "url": "git://github.com/aesa/CambridgeHomes.git"
+        "url": "git://github.com/aesakamar/TreeApp.git"
     },
     "author": "aesa",
     "license": "",

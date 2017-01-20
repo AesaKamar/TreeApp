@@ -1,0 +1,14 @@
+db:
+    image: postgres
+    environment:
+        POSTGRES_PASSWORD: dev
+        POSTGRES_USER: dev
+        POSTGRES_DB: treeApp
+ginko:
+    build: .
+    links:
+    - db
+    environment:
+    - PGHOST=db
+    - PGDATABASE=treeApp
+    - PGUSER=dev
