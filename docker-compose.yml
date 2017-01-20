@@ -12,3 +12,5 @@ ginko:
         - PGHOST=db
         - PGDATABASE=treeApp
         - PGUSER=dev
+    ports: 
+        - "1337:1337"
