@@ -7,8 +7,8 @@ db:
 ginko:
     build: .
     links:
-    - db
+        - db
     environment:
-    - PGHOST=db
-    - PGDATABASE=treeApp
-    - PGUSER=dev
+        - PGHOST=db
+        - PGDATABASE=treeApp
+        - PGUSER=dev
