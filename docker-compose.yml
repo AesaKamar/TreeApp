@@ -14,3 +14,12 @@ ginko:
         - PGUSER=dev
     ports: 
         - "1337:1337"
+    volumes: 
+        - "./api:/usr/src/app/api"
+        - "./assets:/usr/src/app/assets"
+        - "./config:/usr/src/app/config"
+        - "./private_images:/usr/src/app/private_images"
+        - "./tasks:/usr/src/app/tasks"
+        - "./test:/usr/src/app/test"
+        - "./views:/usr/src/app/views"
+        
