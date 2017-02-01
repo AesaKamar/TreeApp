@@ -52,7 +52,7 @@ module.exports.routes = {
     'POST /login': 'AuthController.login',
     '/logout': 'AuthController.logout',
     'GET /index': 'IndexController.index',
-    'GET /default': 'ViewController.default',
+    'GET /': 'ViewController.default',
 
     // Static views
     // =============================================================

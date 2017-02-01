@@ -8,7 +8,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
-
+let express = require('express');
 module.exports.http = {
 
     /****************************************************************************
@@ -26,6 +26,8 @@ module.exports.http = {
         passportInit: require('passport').initialize(),
         passportSession: require('passport').session(),
 
+        setupStaticFrontend: express.static('angular-frontend'),
+
         /***************************************************************************
          *                                                                          *
          * The order in which middleware should be run for HTTP request. (the Sails *
@@ -40,6 +42,7 @@ module.exports.http = {
             // 'requestLogger',
             'passportInit',
             'passportSession',
+            'setupStaticFrontend',
             'bodyParser',
             'handleBodyParserError',
             'compress',
