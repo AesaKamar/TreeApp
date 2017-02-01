@@ -19,7 +19,7 @@ ginko:
         - "./assets:/usr/src/app/assets"
         - "./config:/usr/src/app/config"
         - "./private_images:/usr/src/app/private_images"
-        - "./tasks:/usr/src/app/tasks"
+        - "./tasks-gulp:/usr/src/app/tasks-gulp"
         - "./test:/usr/src/app/test"
         - "./views:/usr/src/app/views"
         
