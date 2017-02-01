@@ -3,3 +3,5 @@ nodemodules/*
 .tmp/
 .tmp/*
 private_images/*/
+.vscode/
+.vscode/*

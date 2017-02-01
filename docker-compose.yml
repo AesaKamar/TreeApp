@@ -22,4 +22,5 @@ ginko:
         - "./tasks-gulp:/usr/src/app/tasks-gulp"
         - "./test:/usr/src/app/test"
         - "./views:/usr/src/app/views"
+        - "./angular-frontend:/usr/src/app/angular-frontend"
         
