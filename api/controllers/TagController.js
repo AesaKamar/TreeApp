@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  upload: function(){
-
-  }
+    _config: {
+        populate: false
+    }
 };

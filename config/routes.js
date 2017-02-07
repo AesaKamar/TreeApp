@@ -60,7 +60,6 @@ module.exports.routes = {
     'GET /login': { view: 'auth/login' },
     'GET /signup': { view: 'auth/signup' },
     'GET /upload': { view: 'pictures/upload' },
-    'GET /szktest1': { view: 'szktest/TestAjax2' },
     'GET /graph': { view: 'home/graph' },
 
     // RESTful API endpoints
@@ -71,7 +70,6 @@ module.exports.routes = {
     // POST /resource                 : Model.create
     // PUT /resource/:id              : Model.update
     // DELETE /resource/:id           : Model.destroy
-    "GET /image/:id": 'PictureController.image',
 
 
 };
