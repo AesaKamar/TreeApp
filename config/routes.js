@@ -52,15 +52,11 @@ module.exports.routes = {
     'POST /login': 'AuthController.login',
     '/logout': 'AuthController.logout',
     'GET /index': 'IndexController.index',
-    'GET /': 'ViewController.default',
 
     // Static views
     // =============================================================
-    'GET /home': { view: 'home/home' },
-    'GET /login': { view: 'auth/login' },
-    'GET /signup': { view: 'auth/signup' },
-    'GET /upload': { view: 'pictures/upload' },
-    'GET /graph': { view: 'home/graph' },
+    'GET /': 'ViewController.default',
+
 
     // RESTful API endpoints
     // =============================================================
