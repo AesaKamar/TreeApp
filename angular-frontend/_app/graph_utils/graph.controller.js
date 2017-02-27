@@ -1,3 +1,4 @@
+//@WARNING  THIS IS DEPRECATED
 (function(app) {
     app.controller('IndexController', IndexController);
 
