@@ -19,9 +19,11 @@
             let width = $window.innerWidth;
             let height = $window.innerHeight;
 
-            let canvas = d3.select("graph").append("canvas")
-                .attr("width", width)
-                .attr("height", height);
+            var canvas = document.querySelector("canvas"),
+                context = canvas.getContext("2d");
+
+            canvas.width = width;
+            canvas.height = height;
 
             var context = document.querySelector("canvas").getContext("2d");
             var color = d3.scaleOrdinal(d3.schemeCategory20);
@@ -82,21 +84,23 @@
                     return simulation.find(d3.event.x - width / 2, d3.event.y - height / 2);
                 }
 
-                function dragstarted(d) {
+                function dragstarted() {
                     if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-                    d.fx = d.x;
-                    d.fy = d.y;
+                    console.log(d3.event);
+                    console.log(d3.event.subject);
+                    d3.event.subject.fx = d3.event.subject.x;
+                    d3.event.subject.fy = d3.event.subject.y;
                 }
 
-                function dragged(d) {
-                    d.fx = d3.event.x;
-                    d.fy = d3.event.y;
+                function dragged() {
+                    d3.event.subject.fx = d3.event.x;
+                    d3.event.subject.fy = d3.event.y;
                 }
 
-                function dragend(d) {
+                function dragend() {
                     if (!d3.event.active) simulation.alphaTarget(0);
-                    d.fx = null;
-                    d.fy = null;
+                    d3.event.subject.fx = null;
+                    d3.event.subject.fy = null;
                 }
 
             });
