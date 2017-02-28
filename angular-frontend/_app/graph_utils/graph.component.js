@@ -54,7 +54,7 @@
                 function ticked() {
                     context.clearRect(0, 0, width, height);
                     context.save();
-                    context.translate(width/1, height/2);
+                    context.translate(width/2, height/2);
 
                     context.beginPath();
                     graph.links.forEach(drawLink);
