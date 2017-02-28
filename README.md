@@ -17,3 +17,25 @@ Made with:
 > -**Postgres**, A nice, stable, and feature rich database
 
 > -**Docker**, Great for shipping and provisioning environments
+
+Fast Installation Guidence
+
+# Step 1
+
+Getting DB running
+
+```
+$ docker-compose run db
+```
+
+# Step 2
+
+Start docker on port 1337
+```
+$ docker-compose run -p 1337:1337  ginko bash
+```
+# Step 3
+
+```
+$ npm start
+```
