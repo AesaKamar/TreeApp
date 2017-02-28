@@ -19,7 +19,7 @@
             let width = $window.innerWidth;
             let height = $window.innerHeight;
 
-            let svg = d3.select("graph").append("svg")
+            let canvas = d3.select("graph").append("canvas")
                 .attr("width", width)
                 .attr("height", height);
 
@@ -33,14 +33,14 @@
             d3.json("_app/graph_utils/miserables.json", function(error, graph) {
                 if (error) throw error;
 
-                var link = svg.append("g")
+                var link = canvas.append("g")
                     .attr("class", "links")
                     .selectAll("line")
                     .data(graph.links)
                     .enter().append("line")
                     .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
 
-                var node = svg.append("g")
+                var node = canvas.append("g")
                     .attr("class", "nodes")
                     .selectAll("circle")
                     .data(graph.nodes)
