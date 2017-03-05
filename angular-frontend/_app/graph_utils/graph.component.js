@@ -27,7 +27,7 @@
 
             var context = document.querySelector("canvas").getContext("2d");
             var color = d3.scaleOrdinal(d3.schemeCategory20);
-
+            
             var simulation = d3.forceSimulation()
                 .force("link", d3.forceLink().id(function(d){return d.id;}))
                 .force("charge", d3.forceManyBody())
@@ -63,7 +63,6 @@
 
                     context.beginPath();
                     graph.nodes.forEach(drawNode);
-                    context.fill();
                     context.strokeStyle = "#fff";
                     context.stroke();
 
@@ -77,7 +76,9 @@
 
                 function drawNode(d){
                     context.moveTo(d.x+3, d.y);
-                    context.arc(d.x, d.y, 3, 0, 2 * Math.PI);
+                    context.arc(d.x, d.y, 10, 0, 2 * Math.PI);
+                    context.fillStyle = color(d.group);
+                    context.fill();
                 }
 
                 function dragsubject(){
@@ -86,8 +87,6 @@
 
                 function dragstarted() {
                     if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-                    console.log(d3.event);
-                    console.log(d3.event.subject);
                     d3.event.subject.fx = d3.event.subject.x;
                     d3.event.subject.fy = d3.event.subject.y;
                 }
