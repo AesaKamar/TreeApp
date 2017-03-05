@@ -19,41 +19,22 @@
             let width = $window.innerWidth;
             let height = $window.innerHeight;
 
-            let svg = d3.select("graph").append("svg")
-                .attr("width", width)
-                .attr("height", height);
+            var canvas = document.querySelector("canvas"),
+                context = canvas.getContext("2d");
 
+            canvas.width = width;
+            canvas.height = height;
+
+            var context = document.querySelector("canvas").getContext("2d");
             var color = d3.scaleOrdinal(d3.schemeCategory20);
-
+            
             var simulation = d3.forceSimulation()
-                .force("link", d3.forceLink().id(function(d) { return d.id; }))
+                .force("link", d3.forceLink().id(function(d){return d.id;}))
                 .force("charge", d3.forceManyBody())
-                .force("center", d3.forceCenter(width / 2, height / 2));
+                .force("center", d3.forceCenter());
 
             d3.json("_app/graph_utils/miserables.json", function(error, graph) {
                 if (error) throw error;
-
-                var link = svg.append("g")
-                    .attr("class", "links")
-                    .selectAll("line")
-                    .data(graph.links)
-                    .enter().append("line")
-                    .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
-
-                var node = svg.append("g")
-                    .attr("class", "nodes")
-                    .selectAll("circle")
-                    .data(graph.nodes)
-                    .enter().append("circle")
-                    .attr("r", 5)
-                    .attr("fill", function(d) { return color(d.group); })
-                    .call(d3.drag()
-                        .on("start", dragstarted)
-                        .on("drag", dragged)
-                        .on("end", dragended));
-
-                node.append("title")
-                    .text(function(d) { return d.id; });
 
                 simulation
                     .nodes(graph.nodes)
@@ -62,39 +43,66 @@
                 simulation.force("link")
                     .links(graph.links);
 
+                d3.select(canvas)
+                    .call(d3.drag()
+                        .container(canvas)
+                        .subject(dragsubject)
+                        .on("start", dragstarted)
+                        .on("drag", dragged)
+                        .on("end", dragend));
+
                 function ticked() {
-                    link
-                        .attr("x1", function(d) { return d.source.x; })
-                        .attr("y1", function(d) { return d.source.y; })
-                        .attr("x2", function(d) { return d.target.x; })
-                        .attr("y2", function(d) { return d.target.y; });
+                    context.clearRect(0, 0, width, height);
+                    context.save();
+                    context.translate(width/2, height/2);
 
-                    node
-                        .attr("cx", function(d) { return d.x; })
-                        .attr("cy", function(d) { return d.y; });
+                    context.beginPath();
+                    graph.links.forEach(drawLink);
+                    context.strokeStyle = "#aaa";
+                    context.stroke();
+
+                    context.beginPath();
+                    graph.nodes.forEach(drawNode);
+                    context.strokeStyle = "#fff";
+                    context.stroke();
+
+                    context.restore();
                 }
+
+                function drawLink(d){
+                    context.moveTo(d.source.x, d.source.y);
+                    context.lineTo(d.target.x, d.target.y);
+                }
+
+                function drawNode(d){
+                    context.moveTo(d.x+3, d.y);
+                    context.arc(d.x, d.y, 10, 0, 2 * Math.PI);
+                    context.fillStyle = color(d.group);
+                    context.fill();
+                }
+
+                function dragsubject(){
+                    return simulation.find(d3.event.x - width / 2, d3.event.y - height / 2);
+                }
+
+                function dragstarted() {
+                    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+                    d3.event.subject.fx = d3.event.subject.x;
+                    d3.event.subject.fy = d3.event.subject.y;
+                }
+
+                function dragged() {
+                    d3.event.subject.fx = d3.event.x;
+                    d3.event.subject.fy = d3.event.y;
+                }
+
+                function dragend() {
+                    if (!d3.event.active) simulation.alphaTarget(0);
+                    d3.event.subject.fx = null;
+                    d3.event.subject.fy = null;
+                }
+
             });
-
-
-
-
-            function dragstarted(d) {
-                if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-                d.fx = d.x;
-                d.fy = d.y;
-            }
-
-            function dragged(d) {
-                d.fx = d3.event.x;
-                d.fy = d3.event.y;
-            }
-
-            function dragended(d) {
-                if (!d3.event.active) simulation.alphaTarget(0);
-                d.fx = null;
-                d.fy = null;
-            }
-
 
         }]
 
