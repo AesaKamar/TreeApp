@@ -1,23 +1,28 @@
 /*jshint esversion: 6 */
 ((app) => {
 
-    app.component("navbar", {
+    app.component("navBar", {
 
         bindings: {
             onInit: "&",
-            screen: "<"
+            screen: "<",
+            router: '<'
         },
+        selector: 'nav-bar',
         templateUrl: "_app/templates/navbar.template.html",
-        controller: ['$window', '$scope', function($window, $scope) {
+        controller: ['$scope', '$state', function($scope, $state) {
             var vm = this;
             this.$onInit = function() {
-                console.log("In navbar Component");
                 vm.currentNavItem = "/profile";
                 $scope.navItems = [
-                    {label: "Profile", route: "/profile"},
-                    {label: "Graph", route: "/graph"},
-                    {label: "Login", route: "/login"}
+                    {label: "Profile", route: 'profile'},
+                    {label: "Graph", route: 'graph'},
+                    {label: "Login", route: 'login'}
                 ]
+            }
+
+            $scope.navigate = function(url){
+                $state.go(url);
             }
         }],
         controllerAs: "vm",
