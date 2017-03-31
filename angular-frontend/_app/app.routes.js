@@ -21,6 +21,21 @@
                         }
                     }
                 },
+            })
+            .state('login', {
+                url: '/login',
+                views: {
+                    "login": {
+
+                        template: `<login></login>`,
+                        resolve: {
+                            //Any promises that need to be injected via a dataservice
+                            // userlist: (UserService) => {
+                            //     return UserService.list();
+                            // }
+                        }
+                    }
+                },
             });
     }]);
 
