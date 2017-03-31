@@ -8,6 +8,7 @@ let viewsSrc = '/usr/src/app/angular-frontend/_app/';
 module.exports = {
     //ACTION NAME
     default: function(req, res) {
+        // Send the page w/ out data
         res.sendfile(viewsSrc + 'app.html');
     }
 };

@@ -58,4 +58,28 @@ describe('TagModel', function() {
         });
     });
 
+    describe('#createOneTag()', function(){
+        it('should creat a tag for a sepcific person to a picture', 
+        (done)=>{
+           Person.findOne({
+               id: 1
+           })
+           .then((a_person)=>{
+               Picture.findOne(1)
+               .then((a_picture)=>{
+                Tag.create({
+                  person: a_person,
+                  picture: a_picture
+                })
+                .then((a_tag)=>{
+                    assert(a_tag.id);
+                    assert(a_tag.person = a_person.id);
+                    assert(a_tag.picture = a_picture.id);
+                    done();
+                })
+                .catch(done);
+               })
+           }) 
+        });
+    });
 });
