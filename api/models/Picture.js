@@ -20,7 +20,7 @@ module.exports = {
             required: true,
         },
         image_string: {
-            type: 'binary',
+            type: 'string',
             required: true
         },
         metadata: {
