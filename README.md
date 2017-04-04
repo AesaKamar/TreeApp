@@ -36,6 +36,12 @@ $ docker-compose run -p 1337:1337  ginko bash
 ```
 # Step 3
 
+Noraml start
 ```
 $ npm start
+```
+
+Start test
+```
+$ npm test
 ```

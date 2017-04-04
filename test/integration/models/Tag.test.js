@@ -8,6 +8,8 @@ describe('TagModel', function() {
         });
     });
 
+    
+
     describe('#create()', function() {
         it('should create a new Tag and associate picture with person', function(done) {
             var found_person, found_picture = {};
@@ -59,13 +61,13 @@ describe('TagModel', function() {
     });
 
     describe('#createOneTag()', function(){
-        it('should creat a tag for a sepcific person to a picture', 
+        it('should create a tag for a sepcific person to a picture', 
         (done)=>{
            Person.findOne({
-               id: 1
+               id: 2
            })
            .then((a_person)=>{
-               Picture.findOne(1)
+               Picture.findOne(2)
                .then((a_picture)=>{
                 Tag.create({
                   person: a_person,
@@ -82,4 +84,16 @@ describe('TagModel', function() {
            }) 
         });
     });
+
+    describe('#destroyOneTagByTagId()',function(){
+        it('should delete a specific tag by tag id, unlink a person to a picture',
+        (done)=>{
+            Tag.destroy({id: 1})
+            .then(()=>{
+                done();
+            })
+            .catch(done);
+        });
+    });
+
 });
