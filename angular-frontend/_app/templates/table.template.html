@@ -1,5 +1,5 @@
-</div>
-<md-list>
+</div class="container" id="tablecontainer">
+<md-list id="list">
   <md-list-item class="md-2-line contact-item" ng-repeat="person in People">
     <img ng-src="{{person.image}}" class="md-avatar" alt="{{person.name}}" />
     <div class="md-list-item-text compact">
@@ -9,7 +9,7 @@
     <!-- <md-button class="md-secondary">
       <img ng-src="http://www.clipartbest.com/cliparts/9Tp/MAz/9TpMAzbTE.png" class="md-icon" height="64" width="64" alt="ImAButton"/>
     </md-button> -->
-
+    <span class="spacer"></span>
     <md-button title="Add Relation" class="md-secondary md-icon-button">
       <md-icon md-font-library="material-icons">add</md-icon>
     </md-button>
@@ -24,7 +24,19 @@
 </md-list>
 </div>
 
-
+<style>
+#list{
+    background-color: #36454f;
+    border-radius: 10px;
+}
+.md-2-line:hover{
+    /*background-color: white;*/
+    opacity: 0.5;
+}
+.spacer{
+    width: 75px;
+}
+</style>
                <!-- <md-list-item ng-repeat="person in People" class="noright _md-button-wrap md-with-secondary ng-scope _md md-clickable" role="listitem" tabindex="-1">
                    <div class="md-list-item-text" layout="row">
                        <p>PERSON: {{person.name}}</p>
