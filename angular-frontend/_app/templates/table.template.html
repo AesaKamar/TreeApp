@@ -1,6 +1,9 @@
 </div class="container" id="tablecontainer">
+<md-input-container>
+  <input type="text" ng-model="query.first_name" placeholder="Search..." autofocus>
+</md-input-container>
 <md-list id="list">
-  <md-list-item class="md-2-line contact-item" ng-repeat="person in People">
+  <md-list-item class="md-2-line contact-item" ng-repeat="person in People | filter:query | orderBy: 'first_name' ">
     <img ng-src="{{person.image}}" class="md-avatar" alt="{{person.name}}" />
     <div class="md-list-item-text compact">
       <h3>{{person.first_name}}</h3>
@@ -8,13 +11,13 @@
     </div>
     <span class="spacer"></span>
     <md-button title="Add Relation" class="md-secondary md-icon-button">
-      <md-icon md-font-library="material-icons">add</md-icon>
+      <md-icon md-ink-ripple="#fdfdfd" md-font-library="material-icons">add</md-icon>
     </md-button>
     <md-button title="Add photo of {{person.first_name}}" class="md-secondary md-icon-button">
-      <md-icon md-font-library="material-icons">add_to_photos</md-icon>
+      <md-icon md-ink-ripple="#fdfdfd" md-font-library="material-icons">add_to_photos</md-icon>
     </md-button>
     <md-button title="View photos of {{person.first_name}}" class="md-secondary md-icon-button">
-      <md-icon md-font-library="material-icons">photo_library</md-icon>
+      <md-icon md-ink-ripple="#fdfdfd" md-font-library="material-icons">photo_library</md-icon>
     </md-button>
     <md-divider md-inset ng-if="!$last"></md-divider>
   </md-list-item>
@@ -23,11 +26,10 @@
 
 <style>
 #list{
-    background-color: #36454f;
+    background-color: #616161;
     border-radius: 7px;
 }
 .md-2-line:hover{
-    /*background-color: white;*/
     opacity: 0.75;
 }
 .md-icon-button:hover{
@@ -35,5 +37,8 @@
 }
 .spacer{
     width: 75px;
+}
+md-input-container{
+    margin-bottom: 0px;
 }
 </style>
