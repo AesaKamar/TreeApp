@@ -6,6 +6,19 @@
       <h3>{{person.first_name}}</h3>
       <p>{{person.last_name}}</p>
     </div>
+    <!-- <md-button class="md-secondary">
+      <img ng-src="http://www.clipartbest.com/cliparts/9Tp/MAz/9TpMAzbTE.png" class="md-icon" height="64" width="64" alt="ImAButton"/>
+    </md-button> -->
+
+    <md-button title="Add Relation" class="md-secondary md-icon-button">
+      <md-icon md-font-library="material-icons">add</md-icon>
+    </md-button>
+    <md-button title="Add photo of {{person.first_name}}" class="md-secondary md-icon-button">
+      <md-icon md-font-library="material-icons">add_to_photos</md-icon>
+    </md-button>
+    <md-button title="View photos of {{person.first_name}}" class="md-secondary md-icon-button">
+      <md-icon md-font-library="material-icons">photo_library</md-icon>
+    </md-button>
     <md-divider md-inset ng-if="!$last"></md-divider>
   </md-list-item>
 </md-list>
