@@ -1,0 +1,28 @@
+</div>
+<md-list>
+  <md-list-item class="md-2-line contact-item" ng-repeat="person in People">
+    <img ng-src="{{person.image}}" class="md-avatar" alt="{{person.name}}" />
+    <div class="md-list-item-text compact">
+      <h3>{{person.first_name}}</h3>
+      <p>{{person.last_name}}</p>
+    </div>
+    <md-divider md-inset ng-if="!$last"></md-divider>
+  </md-list-item>
+</md-list>
+</div>
+
+
+               <!-- <md-list-item ng-repeat="person in People" class="noright _md-button-wrap md-with-secondary ng-scope _md md-clickable" role="listitem" tabindex="-1">
+                   <div class="md-list-item-text" layout="row">
+                       <p>PERSON: {{person.name}}</p>
+                       <p>FAVE COLOR: {{person.favecolor}}</p>
+                   </div>
+               </md-list-item> -->
+<!-- ng-click="goToPerson(person.name, $event)" -->
+<!-- <img alt="Janet Perkins" ng-src="img/100-0.jpeg" class="md-avatar" src="img/100-0.jpeg"> -->
+<!-- <md-list-item ng-repeat="person in People">
+    <div class="md-list-item-text" layout="row">
+        <p>PERSON: {{person.name}}</p>
+        <p>FAVE COLOR: {{person.favecolor}}</p>
+    </div>
+</md-list-item> -->
