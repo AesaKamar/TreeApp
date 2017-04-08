@@ -65,14 +65,14 @@ describe('PersonModel', function() {
         });
     });
 
-    describe('Creating mad fixtures', function() {
+    describe('Creating fixtures', function() {
         it('should create 100 random people', function(done) {
             var promise_array = [];
             _.times(100, function() {
                 promise_array.push(
                     Person.create({
                         first_name: faker.name.findName(),
-                        last_name: faker.name.findName()
+                        last_name: "fixture"
                     })
                 );
             });

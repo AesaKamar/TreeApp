@@ -61,8 +61,8 @@ describe('PictureModel', function() {
 
         });
     });
-    describe('creation per user', function() {
-        it('should create a single picture for each user already created', function(done) {
+    describe('Creating fixtures', function() {
+        it('should create a single picture for each user already created, totaling 100', function(done) {
             //THe only reason we create a user is to satisfy the owner requirement on picture
             User.create({
                 email: uuid.v4() + '@email.com',
@@ -84,6 +84,7 @@ describe('PictureModel', function() {
                                                     return Picture.create({
                                                         file_extension: 'png',
                                                         owner: createdUser,
+                                                        description: "fixture",
                                                         //I need to resolve this promise earlier
                                                         image_string: emojiImageString
                                                     })

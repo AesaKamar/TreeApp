@@ -1,4 +1,6 @@
 const assert = require('assert');
+const Promise = require('bluebird')
+
 describe('TagModel', function() {
 
     describe('#destroy()', function() {
@@ -58,28 +60,47 @@ describe('TagModel', function() {
         });
     });
 
-    describe('#createOneTag()', function(){
-        it('should creat a tag for a sepcific person to a picture', 
-        (done)=>{
-           Person.findOne({
-               id: 1
-           })
-           .then((a_person)=>{
-               Picture.findOne(1)
-               .then((a_picture)=>{
-                Tag.create({
-                  person: a_person,
-                  picture: a_picture
+    describe('Creating 100 Tags', function() {
+        it('should link 100 Person fixtures with 100 Picture fixtures', (done) => {
+            Promise.join(
+                    Person.find({ last_name: "fixture" }).sort('id ASC'),
+                    Picture.find({ description: "fixture" }).sort('id ASC'),
+                    (persons, pictures) => {
+                        return _.zipWith(persons, pictures, (_person, _picture) => {
+                            return Tag.create({ person: _person, picture: _picture })
+                        })
+                    }
+                ).then((tagsPromiseRes) => Promise.all(tagsPromiseRes))
+                .then((tagsRes) => {
+                    assert(_.every(tagsRes, (_tag) => _tag.id))
+                    done()
                 })
-                .then((a_tag)=>{
-                    assert(a_tag.id);
-                    assert(a_tag.person = a_person.id);
-                    assert(a_tag.picture = a_picture.id);
-                    done();
-                })
-                .catch(done);
-               })
-           }) 
+
         });
+    });
+
+    describe('#createOneTag()', function() {
+        it('should creat a tag for a sepcific person to a picture',
+            (done) => {
+                Person.findOne({
+                        id: 1
+                    })
+                    .then((a_person) => {
+                        Picture.findOne(1)
+                            .then((a_picture) => {
+                                Tag.create({
+                                        person: a_person,
+                                        picture: a_picture
+                                    })
+                                    .then((a_tag) => {
+                                        assert(a_tag.id);
+                                        assert(a_tag.person = a_person.id);
+                                        assert(a_tag.picture = a_picture.id);
+                                        done();
+                                    })
+                                    .catch(done);
+                            })
+                    })
+            });
     });
 });
