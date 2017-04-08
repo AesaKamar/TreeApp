@@ -1,9 +1,9 @@
 (function(app) {
-    app.factory('Picture', function($http, $resource) {
+    app.factory('Picture', ['$resource', function($resource) {
         return $resource('/picture/:id', {
-            picture: '@picture',
+            picture: '@picture'
         }, {
             update: { method: 'PUT' },
         });
-    });
-})(angular.module('treeApp'));
+    }]);
+})(angular.module('app'));
