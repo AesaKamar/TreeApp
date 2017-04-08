@@ -86,43 +86,44 @@ describe('PersonModel', function() {
                 .catch(done);
         });
 
-        it('should create 500 random relations', function(done) {
-            var promise_array = [];
-            _.times(500, function() {
-                promise_array.push(
-                    Relation.create({
-                        related_from: _.random(1, 100, false),
-                        related_to: _.random(1, 100, false),
-                        classification: 'son'
-                    })
-                );
-            });
-            Promise.all(promise_array)
-                .then(function() {
-                    Relation.count({}).then(function(count) {
-                        assert(count > 499);
-                    });
-                }).then(function() {
-                    Relation.find({
-                        id: 400
-                    }).then(function(res) {
-                        assert(res);
-                        done();
-                    });
-                })
-                .catch(done);
-        });
+        //@NOTE Deprecated in favor of nuclear family relations in Relation.Test.js
+        // it('should create 500 random relations', function(done) {
+        //     var promise_array = [];
+        //     _.times(500, function() {
+        //         promise_array.push(
+        //             Relation.create({
+        //                 related_from: _.random(1, 100, false),
+        //                 related_to: _.random(1, 100, false),
+        //                 classification: 'son'
+        //             })
+        //         );
+        //     });
+        //     Promise.all(promise_array)
+        //         .then(function() {
+        //             Relation.count({}).then(function(count) {
+        //                 assert(count > 499);
+        //             });
+        //         }).then(function() {
+        //             Relation.find({
+        //                 id: 400
+        //             }).then(function(res) {
+        //                 assert(res);
+        //                 done();
+        //             });
+        //         })
+        //         .catch(done);
+        // });
 
-        it('should still have 500 relation records', function(done) {
-            Relation.count({}).then(function(count) {
-                    assert(count > 450);
-                })
-                .then(function() {
-                    // some tests
-                    done();
-                })
-                .catch(done);
-        });
+        // it('should still have 500 relation records', function(done) {
+        //     Relation.count({}).then(function(count) {
+        //             assert(count > 450);
+        //         })
+        //         .then(function() {
+        //             // some tests
+        //             done();
+        //         })
+        //         .catch(done);
+        // });
 
     });
 });

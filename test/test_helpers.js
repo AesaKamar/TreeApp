@@ -8,7 +8,8 @@ const path = require('path')
  */
 module.exports = {
 
-    getRandomEmojiAsBase64: getRandomEmojiAsBase64
+    getRandomEmojiAsBase64: getRandomEmojiAsBase64,
+    cartesianProduct: cartesian
 }
 
 
@@ -36,3 +37,7 @@ function getRandomEmojiAsBase64(folderLocation) {
         })
     })
 }
+
+let f = (a, b) => [].concat(...a.map(a => b.map(b => [].concat(a, b))));
+
+function cartesian(a, b, ...c) { return b ? cartesian(f(a, b), ...c) : a }

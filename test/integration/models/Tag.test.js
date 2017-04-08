@@ -60,7 +60,7 @@ describe('TagModel', function() {
         });
     });
 
-    describe('Creating 100 Tags', function() {
+    describe('Creating fixtures', function() {
         it('should link 100 Person fixtures with 100 Picture fixtures', (done) => {
             Promise.join(
                     Person.find({ last_name: "fixture" }).sort('id ASC'),
