@@ -19,16 +19,19 @@
             //===============================
             //Setup graph container responsivley
             //===============================
-            let width = $window.innerWidth;
-            let height = $window.innerHeight;
 
-            var canvas = document.querySelector("canvas"),
-                context = canvas.getContext("2d");
-            canvas.width = width;
-            canvas.height = height;
+            // set a width and height for our SVG
+            let margin = 0.8,
+                width = $window.innerWidth * margin,
+                height = $window.innerHeight * margin;
 
-            var context = document.querySelector("canvas").getContext("2d");
-            var color = d3.scaleOrdinal(d3.schemeCategory20);
+            // var canvas = document.querySelector("canvas"),
+            //     context = canvas.getContext("2d");
+            // canvas.width = width;
+            // canvas.height = height;
+
+            // var context = document.querySelector("canvas").getContext("2d");
+            // var color = d3.scaleOrdinal(d3.schemeCategory20);
 
             vm.GraphContainer = {
                 PersonNodes: [],
@@ -37,125 +40,90 @@
             //===============================
             //Build force simulation
             //===============================
-            // Person.query({ last_name: "fixture" }, (data) => {
-            //     // let goodData = _.map(data, (e) => _.assign({}, e))
-            //     let goodData = _.map(data, (e) => ({ id: e.id }))
-            //     vm.GraphContainer.PersonNodes = (goodData)
-            //     console.log(vm.GraphContainer);
-            //     simulation.restart()
-            // });
-            vm.GraphContainer.PersonNodes = [
-                { id: 1 },
-                { id: 2 },
-                { id: 1 },
-                { id: 1 },
-                { id: 1 }
-            ];
+            Person.query({ last_name: "fixture", limit: 100 }, (data) => {
+                vm.GraphContainer.PersonNodes = data
+                console.log(vm.GraphContainer);
+                restart();
+            });
+            Relation.query({ classification: "fixture_nuclear", limit: 500 }, (data) => {
+                console.log(data)
+                vm.GraphContainer.RelationLinks = _.map(data, (e) => {
+                    return {
+                        source: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_from === _person.id),
+                        target: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_to === _person.id),
+                    }
+                });
+                console.log(vm.GraphContainer.RelationLinks);
+                restart();
+            });
+            // vm.GraphContainer.PersonNodes = [
+            //     { id: 1 },
+            //     { id: 2 },
+            //     { id: 1 },
+            //     { id: 1 },
+            //     { id: 1 }
+            // ];
             // console.log(vm.GraphContainer.PersonNodes)
 
 
 
 
-            //===============================
-            //Build force simulation
-            //===============================
-            var simulation = d3.forceSimulation()
-                .force("link", d3.forceLink().id(function(d) { return d.id; }))
-                .force("charge", d3.forceManyBody())
-                .force("center", d3.forceCenter());
 
-            simulation
-                .nodes(vm.GraphContainer.PersonNodes)
-                .on("tick", ticked);
+            // log to console for debugging
+            // console.log(JSON.stringify(links, null, 4));
+            // console.log('nodes:');
+            // console.log(JSON.stringify(nodes, null, 4));
 
-            simulation.force("link")
-                .links(vm.GraphContainer.RelationLinks);
+            // add a SVG to the body for our viz
+            var svg = d3.select('#graph').append('svg')
+                .attr('width', width)
+                .attr('height', height);
 
-            d3.select(canvas)
-                .call(d3.drag()
-                    .container(canvas)
-                    .subject(dragsubject)
-                    .on("start", dragstarted)
-                    .on("drag", dragged)
-                    .on("end", dragend));
+            // use the force
+            let restart = () => {
+                var force = d3.layout.force()
+                    .size([width, height])
+                    .nodes(d3.values(vm.GraphContainer.PersonNodes))
+                    .links(vm.GraphContainer.RelationLinks)
+                    .on("tick", tick)
+                    .linkDistance(100)
+                    .charge(-300)
+                    .start();
 
-            //===============================
-            //Dataservce <-> Graph transform methods
-            //===============================
-            // function()
+                // setup link definition
+                var link = svg.selectAll('.link')
+                    .data(vm.GraphContainer.RelationLinks)
+                    .enter().append('line')
+                    .attr('class', 'link');
 
-            //===============================
-            //Create event handlers
-            //===============================
-            function restart() {
+                // setup node definition
+                var node = svg.selectAll('.node')
+                    .data(force.nodes())
+                    .enter().append('g')
+                    .attr('class', 'node')
+                    .call(force.drag);
 
-                // Apply the general update pattern to the nodes.
-                node = node.data(vm.GraphContainer.PersonNodes, function(d) { return d.id; });
-                node.exit().remove();
-                node = node.enter().append("circle").attr("fill", function(d) { return color(d.id); }).attr("r", 8).merge(node);
 
-                // Apply the general update pattern to the links.
-                link = link.data(vm.GraphContainer.RelationLinks, function(d) { return d.source.id + "-" + d.target.id; });
-                link.exit().remove();
-                link = link.enter().append("line").merge(link);
+                node.append('image')
+                    .attr('xlink:href', (d) => "http://www.iconshock.com/img_vista/FLAT/food/jpg/banana_icon.jpg")
+                    .attr("x", (d) => -25)
+                    .attr("y", (d) => -25)
+                    .attr("height", 50)
+                    .attr("width", 50);
 
-                // Update and restart the simulation.
-                simulation.nodes(nodes);
-                simulation.force("link").links(links);
-                simulation.alpha(1).restart();
+                // tick function to create curved lines and move things around    
+                function tick(e) {
+                    link.attr('x1', (d) => d.source.x)
+                        .attr('y1', (d) => d.source.y)
+                        .attr('x2', (d) => d.target.x)
+                        .attr('y2', (d) => d.target.y);
+
+                    node.attr("transform", function(d) {
+                        return "translate(" + d.x + "," + d.y + ")";
+                    });
+                }
             }
-
-            function ticked() {
-                context.clearRect(0, 0, width, height);
-                context.save();
-                context.translate(width / 2, height / 2);
-
-                context.beginPath();
-                vm.GraphContainer.RelationLinks.forEach(drawLink);
-                context.strokeStyle = "#aaa";
-                context.stroke();
-
-                context.beginPath();
-                // console.log(vm.GraphContainer.PersonNodes)
-                vm.GraphContainer.PersonNodes.forEach(drawNode);
-                context.strokeStyle = "#fff";
-                context.stroke();
-
-                context.restore();
-            }
-
-            function drawLink(d) {
-                context.moveTo(d.source.x, d.source.y);
-                context.lineTo(d.target.x, d.target.y);
-            }
-
-            function drawNode(d) {
-                context.moveTo(d.x + 3, d.y);
-                context.arc(d.x, d.y, 10, 0, 2 * Math.PI);
-                context.fillStyle = "#white";
-                context.fill();
-            }
-
-            function dragsubject() {
-                return simulation.find(d3.event.x - width / 2, d3.event.y - height / 2);
-            }
-
-            function dragstarted() {
-                if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-                d3.event.subject.fx = d3.event.subject.x;
-                d3.event.subject.fy = d3.event.subject.y;
-            }
-
-            function dragged() {
-                d3.event.subject.fx = d3.event.x;
-                d3.event.subject.fy = d3.event.y;
-            }
-
-            function dragend() {
-                if (!d3.event.active) simulation.alphaTarget(0);
-                d3.event.subject.fx = null;
-                d3.event.subject.fy = null;
-            }
+            restart();
 
 
         }]

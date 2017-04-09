@@ -78,7 +78,7 @@ describe('PersonModel', function() {
             });
             Promise.all(promise_array)
                 .then(function() {
-                    Person.count({}).then(function(count) {
+                    Person.count({ last_name: "fixture" }).then(function(count) {
                         assert(count > 99);
                     });
                 })
