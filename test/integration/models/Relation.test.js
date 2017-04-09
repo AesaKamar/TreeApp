@@ -126,6 +126,21 @@ describe('RelationModel', function() {
         });
     });
 
+    /*NOTE FOR GINKO DEVS ON Test fixtures
+
+    You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
+    I tried to use this pattern in the other models's tests as well. 
+
+    We have a fixture in Person.test.js that creates 100 person objects. 
+    In this test, we find those 100 people who have a last name of 'fixture'
+    
+    We need to represent the idea of a family, so we group the list of 100 People into groups of 5
+    for each group of 5, we will create relations between each of them. 
+    *Technical note*: The set of relations in one family is equal to the cartesian product of a family group with itself with a unique source and target
+
+    Once we have all the relations, we just create them. 
+
+    */
     describe('Create fixtures', function() {
         it('should create loosely coupled family structures', (done) => {
             Promise.all(Person.find({ last_name: "fixture" }).sort('id ASC'))
