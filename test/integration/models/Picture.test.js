@@ -61,6 +61,19 @@ describe('PictureModel', function() {
 
         });
     });
+
+    /*NOTE FOR GINKO DEVS ON Test fixtures
+
+    You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
+    I tried to use this pattern in the other models's tests as well. 
+
+    We have a fixture in Person.test.js that creates 100 person objects. 
+    In this test, we find those 100 people who have a last name of 'fixture'
+    Once we find them, we create a random emoji picture. 
+
+    We will later have to create tags to tag the users in the picture
+
+    */
     describe('Creating fixtures', function() {
         it('should create a single picture for each user already created, totaling 100', function(done) {
             //THe only reason we create a user is to satisfy the owner requirement on picture
@@ -68,7 +81,7 @@ describe('PictureModel', function() {
                 email: uuid.v4() + '@email.com',
                 password: uuid.v4() + 'password'
             }).then(function(createdUser) {
-                Person.find({})
+                Person.find({ last_name: 'fixture' })
                     .then(
                         (allPeople) => {
                             let results = _(allPeople)
@@ -114,43 +127,10 @@ describe('PictureModel', function() {
                         },
                         (err) => {}
                     )
-                    // Picture.create({
-                    //         file_extension: 'png',
-                    //         owner: res1,
-                    //         image_string: bananaImage
-                    //     })
-                    //     .then(function(results) {
-                    //         // some tests
-                    //         assert(results.owner == res1.id);
-                    //         done();
-                    //     })
-                    //     .catch(done);
             });
 
         });
     });
-
-    // describe('vadidateFilePath', function() {
-    //   it('should validate the existance of a file in private_images', function(done) {
-    //     Picture.findOne({
-    //         file_path: 'private_images/bananas.jpg',
-    //       })
-    //       .then(function(results) {
-    //         // some tests
-    //         fs.access(results.file_path, fs.F_OK, function(err) {
-    //           if (!err) {
-    //             // Do something
-    //             done();
-    //           } else {
-    //             // It isn't accessible
-    //             assert(err === false);
-    //           }
-    //         });
-    //
-    //       })
-    //       .catch(done);
-    //   });
-    // });
 
 
     describe('#find()', function() {

@@ -126,8 +126,23 @@ describe('RelationModel', function() {
         });
     });
 
+    /*NOTE FOR GINKO DEVS ON Test fixtures
+
+    You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
+    I tried to use this pattern in the other models's tests as well. 
+
+    We have a fixture in Person.test.js that creates 100 person objects. 
+    In this test, we find those 100 people who have a last name of 'fixture'
+    
+    We need to represent the idea of a family, so we group the list of 100 People into groups of 5
+    for each group of 5, we will create relations between each of them. 
+    *Technical note*: The set of relations in one family is equal to the cartesian product of a family group with itself with a unique source and target
+
+    Once we have all the relations, we just create them. 
+
+    */
     describe('Create fixtures', function() {
-        it('should create loosely coupled family structures', (done) => {
+        it('should create loosely coupled nuclear family structures', (done) => {
             Promise.all(Person.find({ last_name: "fixture" }).sort('id ASC'))
                 .then((persons) => {
                     //Arrange all the persons into groups of 5. 
@@ -154,6 +169,48 @@ describe('RelationModel', function() {
                     let flattenedFamilyGroups = _.flatten(nestedFamilyCreationPromises)
                         // console.log(flattenedStuff)
                     return Promise.resolve(flattenedFamilyGroups)
+                })
+                .then((promiseArray) => Promise.all(promiseArray))
+                .then((resolvedRelationPromises) => {
+                    //Assert everything was created successfully
+                    assert(_.every(resolvedRelationPromises, (relation) => relation.id))
+                    Promise.resolve('Good to go!')
+                })
+                .then(done())
+                .catch(done);
+        });
+        it('should create random associations so simulate marriages and relations across families', (done) => {
+            Promise.all(Person.find({ last_name: "fixture" }).sort('id ASC'))
+                .then((persons) => {
+                    //Keep a randn group of 30 People
+                    let randomSubsetOfPeople = _(persons)
+                        .shuffle()
+                        .take(30)
+                        .value();
+                    //Marry them off into pairs
+                    let coupledPairs = _.chunk(randomSubsetOfPeople, 2)
+
+                    //Generate 
+                    let marriageRelationsToCreate = _.map(coupledPairs, (family) => {
+                        let familyById = _.map(family, (member) => member.id)
+                        let allPermutations = testHelper.cartesianProduct(familyById, familyById);
+                        let uniqueRelations = _.filter(allPermutations, (relation) => relation[0] != relation[1])
+                        return uniqueRelations
+                    })
+                    return Promise.resolve(marriageRelationsToCreate)
+                })
+                .then((marriages) => {
+                    //From each marriage permutation group, create the relations
+                    let nestedMarriageCreationPromises = _(marriages)
+                        .map((marriage) => {
+                            return _.map(marriage, (relation) => {
+                                return Relation.create({ related_to: relation[0], related_from: relation[1], classification: "fixture_marriage" })
+                            })
+                        })
+                        .value();
+                    let flattenedMarriageGroups = _.flatten(nestedMarriageCreationPromises)
+                        // console.log(flattenedStuff)
+                    return Promise.resolve(flattenedMarriageGroups)
                 })
                 .then((promiseArray) => Promise.all(promiseArray))
                 .then((resolvedRelationPromises) => {
