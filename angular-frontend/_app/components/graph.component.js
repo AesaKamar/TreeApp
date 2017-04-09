@@ -55,21 +55,51 @@
 
             */
             Person.query({ last_name: "fixture", limit: 100 }, (data) => {
-                vm.GraphContainer.PersonNodes = data;
-                // console.log(vm.GraphContainer);
+                let additions = data;
+                vm.GraphContainer.PersonNodes = _.concat(vm.GraphContainer.PersonNodes, additions)
+                    // console.log(vm.GraphContainer);
                 restart();
             });
             Relation.query({ classification: "fixture_nuclear", limit: 500 }, (data) => {
                 // console.log(data)
-                vm.GraphContainer.RelationLinks = _.map(data, (e) => {
+                let additions = _.map(data, (e) => {
                     return {
                         source: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_from === _person.id),
                         target: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_to === _person.id),
                     }
                 });
-                // console.log(vm.GraphContainer.RelationLinks);
+                vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
+                    // console.log(vm.GraphContainer.RelationLinks);
                 restart();
             });
+
+            Relation.query({ classification: "fixture_marriage", limit: 100 }, (data) => {
+                // console.log(data)
+                let additions = _.map(data, (e) => {
+                    return {
+                        source: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_from === _person.id),
+                        target: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_to === _person.id),
+                    }
+                });
+                vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
+                    // console.log(vm.GraphContainer.RelationLinks);
+                restart();
+            });
+
+            /**
+            ##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######:::
+            ##:'##: ##:::'## ##::: ##.... ##: ###:: ##:. ##:: ###:: ##:'##... ##::
+            ##: ##: ##::'##:. ##:: ##:::: ##: ####: ##:: ##:: ####: ##: ##:::..:::
+            ##: ##: ##:'##:::. ##: ########:: ## ## ##:: ##:: ## ## ##: ##::'####:
+            ##: ##: ##: #########: ##.. ##::: ##. ####:: ##:: ##. ####: ##::: ##::
+            ##: ##: ##: ##.... ##: ##::. ##:: ##:. ###:: ##:: ##:. ###: ##::: ##::
+             ###. ###:: ##:::: ##: ##:::. ##: ##::. ##:'####: ##::. ##:. ######:::
+            ...::...:::..:::::..::..:::::..::..::::..::....::..::::..:::......::::
+
+            Graph perfmorance is brittle and not optimized. So the force simulation will probably break
+            after a few seconds of running
+                                                             
+             */
 
 
 
