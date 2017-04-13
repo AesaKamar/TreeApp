@@ -6,13 +6,12 @@
   "keywords": [],
   "dependencies": {
     "assert": "^1.4.1",
-    "async": "^2.1.4",
-    "async-q": "latest",
     "bcrypt": "latest",
     "bcrypt-nodejs": "latest",
     "bluebird": "^3.4.6",
     "chai": "latest",
     "ejs": "^2.5.3",
+    "express": "^4.15.2",
     "guid": "0.0.12",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
@@ -55,8 +54,7 @@
     "sails-postgresql": "^0.11.4"
   },
   "scripts": {
-    "debug": "node debug app.js",
-    "start": "nodemon app.js",
+    "start": "nodemon --debug --inspect app.js",
     "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js"
   },
   "main": "app.js",
@@ -69,19 +67,6 @@
   "devDependencies": {
     "nodemon": "^1.11.0",
     "faker": "latest",
-    "grunt": "0.4.5",
-    "grunt-bower": "^0.21.0",
-    "grunt-contrib-clean": "0.6.0",
-    "grunt-contrib-coffee": "0.13.0",
-    "grunt-contrib-concat": "0.5.1",
-    "grunt-contrib-copy": "0.5.0",
-    "grunt-contrib-cssmin": "0.9.0",
-    "grunt-contrib-jst": "0.6.0",
-    "grunt-contrib-less": "1.1.0",
-    "grunt-contrib-uglify": "0.7.0",
-    "grunt-contrib-watch": "0.5.3",
-    "grunt-sails-linker": "~0.10.1",
-    "grunt-sync": "0.2.4",
     "supertest": "^2.0.1"
   }
 }
