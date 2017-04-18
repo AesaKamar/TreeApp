@@ -42,6 +42,8 @@
         <script src="/_app/app.js"></script>
         <script src="/_app/app.routes.js"></script>
         <script src="/_app/app.themes.js"></script>
+        <script src="/_app/components/profile.component.js"></script>
+        <script src="/_app/components/people.component.js"></script>
         <script src="/_app/components/graph.component.js"></script>
         <script src="/_app/components/login.component.js"></script>
         <script src="/_app/components/navbar.component.js"></script>
@@ -53,6 +55,8 @@
 
 <body ng-app="app" ng-strict-di>
     <nav-bar></nav-bar>
+    <ui-view name="profile"><ui-view>
+    <ui-view name="people"><ui-view>
     <ui-view name="graph"></ui-view>
     <ui-view name="login"></ui-view>
 </body>
