@@ -4,7 +4,7 @@
 </md-input-container>
 <md-list id="list">
   <md-list-item class="md-2-line contact-item" ng-repeat="person in People | filter:personFilter | orderBy: 'first_name'">
-    <img ng-src="{{person.image}}" class="md-avatar" alt="{{person.name}}" />
+    <img data-ng-src="data:image/png;base64,{{person.image}}" class="md-avatar" alt="{{person.name}}" />
     <div class="md-list-item-text compact">
       <h3>{{person.first_name}}</h3>
       <p>{{person.last_name}}</p>
