@@ -1,61 +1,224 @@
+<md-content>
+    <md-input-container class="md-input-had-value" style="width:100%">
+        <label for="email">Email</label>
+        <input class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="email" style/>
+    </md-input-container>
+    <md-input-container class="md-input-had-value" style="width:100%">
+        <label for="password">Password</label>
+        <input type="password"class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="password" style/>
+    </md-input-container>
+    <button type="button" class="button buttonBlue">Log In
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
+</md-content>
+
 <style>
-    input {
-        width: 40%;
-        padding: 12px 20px;
-        border-radius: 4px;
-        text-align: center;
-    }
+* { box-sizing:border-box; }
 
-    button {
-        width: 40%;
-        padding: 12px 20px;
-        border-radius: 7px;
-        text-align: center;
-        color: black;
-    }
+body {
+	font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+}
 
-    input:focus {
-        border: 3px solid #555;
-    }
+hgroup {
+	text-align:center;
+	margin-top: 4em;
+}
 
-    a:link {
-        color: #FFD700;
-    }
+h1, h3 { font-weight: 300; }
 
-    a:visited {
-        color: #BFA100;
-    }
+h1 { color: #636363; }
 
-    .form-control, .login-control {
-        margin: 5px;
-    }
+h3 { color: #ffd700; }
 
-    .login-form-1 {
-        text-align: center;
-        margin: auto;
-        width: 50%;
-        padding: 10px;
-    }
+md-content {
+	width: 380px;
+	margin: 4em auto;
+	padding: 2em 2em 2em 2em;
+	background: #616161;
+	border: 1px solid #ebebeb;
+	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+}
+
+#group {
+	position: relative;
+	margin-bottom: 45px;
+}
+
+input {
+	font-size: 18px;
+	padding: 10px 10px 10px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background: #fafafa;
+	color: #636363;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #757575;
+}
+
+input:focus { outline: none; }
+
+/* active */
+
+input:focus ~ label, input.used ~ label {
+	top: -20px;
+    transform: scale(.75); left: -2px;
+	color: #ffd700;
+}
+
+/* Underline */
+
+.bar {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+
+.bar:before, .bar:after {
+	content: '';
+	height: 2px;
+	width: 0;
+	bottom: 1px;
+	position: absolute;
+	background: #ffd700;
+	transition: all 0.2s ease;
+}
+
+.bar:before { left: 50%; }
+
+.bar:after { right: 50%; }
+
+/* active */
+
+input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+
+/* Highlight */
+
+.highlight {
+	position: absolute;
+	height: 60%;
+	width: 100px;
+	top: 25%;
+	left: 0;
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+/* active */
+
+input:focus ~ .highlight {
+	animation: inputHighlighter 0.3s ease;
+}
+
+/* Animations */
+
+@keyframes inputHighlighter {
+	from { background: #ffd700; }
+	to 	{ width: 0; background: transparent; }
+}
+
+/* Button */
+
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  margin: .3em 0 1em 0;
+  width: 100%;
+  vertical-align: middle;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 20px;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid #ffd700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.button:focus { outline: 0; }
+
+/* Button modifiers */
+
+.buttonBlue {
+  background: #ccac00;
+  text-shadow: 1px 1px 0 #ffd700;
+}
+
+.buttonBlue:hover { background: #b89b00; }
+
+/* Ripples container */
+
+.ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Ripples circle */
+
+.ripplesCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.ripples.is-active .ripplesCircle {
+  animation: ripples .4s ease-in;
+}
+
+/* Ripples animation */
+
+@keyframes ripples {
+  0% { opacity: 0; }
+
+  25% { opacity: 1; }
+
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    opacity: 0;
+  }
+}
+
+footer { text-align: center; }
+
+footer p {
+	color: #888;
+	font-size: 13px;
+	letter-spacing: .4px;
+}
+
+footer a {
+	color: #4a89dc;
+	text-decoration: none;
+	transition: all .2s ease;
+}
+
+footer a:hover {
+	color: #666;
+	text-decoration: underline;
+}
+
+footer img {
+	width: 80px;
+	transition: all .2s ease;
+}
+
+footer img:hover { opacity: .83; }
+
+footer img:focus , footer a:focus { outline: none; }
 </style>
-
-<div class="login-form-1">
-	<form id="login-form" class="text-left">
-		<div class="main-login-form">
-			<div class="login-group">
-				<div class="form-group">
-					<label for="lg_username" class="sr-only">Username</label>
-					<input type="text" class="form-control" id="lg_username" name="lg_username" placeholder="username">
-				</div>
-				<div class="form-group">
-					<label for="lg_password" class="sr-only">Password</label>
-					<input type="password" class="form-control" id="lg_password" name="lg_password" placeholder="password">
-				</div>
-			</div>
-			<button type="submit" class="login-control">log in</button>
-		</div>
-		<div class="etc-login-form">
-			<p>forgot your password? <a href="#">click here</a></p>
-			<p>new user? <a href="#">create new account</a></p>
-		</div>
-	</form>
-</div>
