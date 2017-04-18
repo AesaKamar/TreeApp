@@ -63,11 +63,11 @@ describe('TagModel', function() {
     /*NOTE FOR GINKO DEVS ON Test fixtures
 
     You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
-    I tried to use this pattern in the other models's tests as well. 
+    I tried to use this pattern in the other models's tests as well.
 
-    We have a test fixture in Person.test.js that creates 100 person objects. 
+    We have a test fixture in Person.test.js that creates 100 person objects.
     In this test, we find those 100 people who have a last name of 'fixture'
-    
+
    We also have a test fixture in Picture.test.js that create 100 picture objects.
    In this test, we find those 100 pictures that have a description of 'fixture'
 
