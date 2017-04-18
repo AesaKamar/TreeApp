@@ -1,9 +1,9 @@
 (function(app) {
-    app.factory('Relation', function($resource) {
+    app.factory('Relation', ['$resource', function($resource) {
         return $resource('/relation/:id', {
             relation: "@relation"
         }, {
             update: { method: 'PUT' },
         });
-    });
-})(angular.module('treeApp'));
+    }]);
+})(angular.module('app'));

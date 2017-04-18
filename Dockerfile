@@ -14,5 +14,6 @@ COPY . /usr/src/app
 
 
 EXPOSE 1337
+EXPOSE 5858
 # npm start command is further defined in pachage.json
 CMD [ "npm", "start" ]

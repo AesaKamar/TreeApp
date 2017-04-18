@@ -5,6 +5,14 @@
         text-align: center;
         margin: 5px;
     }
+  
+    md-content {
+        width: 60%;
+    }
+  
+    md-card {
+        background-color: #616161;
+    }
 
     #userInformation {
         margin: auto;
@@ -19,14 +27,25 @@
 </style>
 
 <div>
-    <body>
-        <div id=userInformation>
-            <h3 id="email">You are logged in as: {{userInformation.email}}</h3>
-            <div id="passSection">
-                <input type="password" name="psw" placeholder="new password"><br>
-                <input type="password" name="psw2" placeholder="repeat password"><br>
-                <button id="passButton">Reset password</button>
-            </div>
-        </div>
-    </body>
+    <md-content style="width: 60%">
+    <md-card>
+       <md-card-title>
+         <md-card-title-text>
+           <span class="md-headline">Profile Information</span>
+           <span class="md-subhead"><b>Email:</b> {{userInformation.email}}</span>
+           <span class="md-subhead"><b>Password:</b> {{userInformation.password}}</span>
+         </md-card-title-text>
+         <md-card-title-media>
+             <div class="md-media-md card-media">
+                  <img height="50" width="30" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"/>
+             </div>
+         </md-card-title-media>
+       </md-card-title>
+       <md-card-actions layout="row" layout-align="start center">
+         <md-button>Change Email</md-button>
+         <md-button>Change Password</md-button>
+         <md-button>Change Image</md-button>
+       </md-card-actions>
+     </md-card>
+     </md-content>
 </div>

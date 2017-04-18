@@ -10,7 +10,7 @@
         templateUrl: "_app/templates/profile.template.html",
         controller: ['$window', '$scope', function($window, $scope) {
             this.$onInit = function() {
-                $scope.userInformation = {email: "dummyemail@gmail.com", password: "password123"}
+                $scope.userInformation = {email: "DarthPlagueis@gmail.com", password: "hunter2"}
             }
             console.log("In Profile Component");
         }]
