@@ -13,9 +13,7 @@
 
             $scope.People = [];
             Person.query({ last_name: "fixture", limit: 50 }, (data) => {
-                console.log(data);
                 Picture.query({ description: "fixture", limit: 50 }, (pics) => {
-                    console.log(pics[0]);
                     for (var i = 0; i< 50; i++){
                         let namearr = data[i].first_name.split(" ");
                         let person = {
