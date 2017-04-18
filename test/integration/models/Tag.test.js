@@ -81,6 +81,11 @@ describe('TagModel', function() {
                     assert(a_tag.person = a_person.id);
                     assert(a_tag.picture = a_picture.id);
                     done();
+                });
+               });
+           });
+        });
+    });
 
     /*NOTE FOR GINKO DEVS ON Test fixtures
 
