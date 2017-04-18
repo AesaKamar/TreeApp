@@ -90,10 +90,26 @@ describe('TagModel', function() {
         (done)=>{
             Tag.destroy({id: 1})
             .then(()=>{
+                assert()
                 done();
             })
             .catch(done);
         });
     });
+
+    describe('#UpdateOneTag()', function() {
+        it('should change the information of a tag', 
+        (done)=> {
+            Tag.find({
+                    id: 1
+                })
+                .then((a_tag)=> {
+
+                    // some tests
+                    done();
+                })
+                .catch(done);
+        });
+    });        
 
 });
