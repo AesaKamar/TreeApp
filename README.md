@@ -1,6 +1,6 @@
 # TreeApp
 
-**Family Tree visualzation, picture tagging, based social network**
+**Family Tree visualzation based social network**
 
 Made with:
 
@@ -22,7 +22,7 @@ Fast Installation Guidence
 
 # Step 1
 
-Getting DB running
+Use docker-compose to start the database
 
 ```
 $ docker-compose run db
@@ -30,13 +30,23 @@ $ docker-compose run db
 
 # Step 2
 
-Start docker on port 1337
+Start the Ginko app container on port 1337 using docker compose
 ```
 $ docker-compose run -p 1337:1337  ginko bash
 ```
+
 # Step 3
 
+
 Noraml start
+In the Ginko container, run the tests to seed testing data into the database
+```
+$ npm test
+```
+
+# Step 4
+
+In the Ginko container, run the application and start the server
 ```
 $ npm start
 ```

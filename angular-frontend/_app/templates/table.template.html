@@ -1,0 +1,47 @@
+</div class="container" id="tablecontainer">
+<md-input-container md-no-float>
+  <input type="text" ng-model="query" placeholder="Search..." autofocus>
+</md-input-container>
+<md-list id="list">
+  <md-list-item class="md-2-line contact-item" ng-repeat="person in People | filter:personFilter | orderBy: 'first_name'">
+    <img data-ng-src="data:image/png;base64,{{person.image}}" class="md-avatar" alt="{{person.name}}" />
+    <div class="md-list-item-text compact">
+      <h3>{{person.first_name}}</h3>
+      <p>{{person.last_name}}</p>
+    </div>
+    <span class="spacer"></span>
+    <md-button title="Add Relation" class="md-secondary md-icon-button">
+      <md-icon md-ink-ripple="#FFA500" md-font-library="material-icons">add</md-icon>
+    </md-button>
+    <md-button title="Add photo of {{person.first_name}}" class="md-secondary md-icon-button">
+      <md-icon md-ink-ripple="#FFA500" md-font-library="material-icons">add_to_photos</md-icon>
+    </md-button>
+    <md-button title="View photos of {{person.first_name}}" class="md-secondary md-icon-button">
+      <md-icon md-ink-ripple="#FFA500" md-font-library="material-icons">photo_library</md-icon>
+    </md-button>
+    <md-divider md-inset ng-if="!$last"></md-divider>
+  </md-list-item>
+</md-list>
+</div>
+
+<style>
+#list{
+    background-color: #616161;
+    border-radius: 7px;
+    margin-top: 0px;
+    height: 500px;
+    overflow-y: scroll;
+}
+.md-2-line:hover{
+    opacity: 0.75;
+}
+.md-icon-button:hover{
+    opacity: .75;
+}
+.spacer{
+    width: 150px;
+}
+md-input-container{
+    margin-bottom: 0px;
+}
+</style>

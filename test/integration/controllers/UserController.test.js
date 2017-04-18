@@ -56,11 +56,12 @@ describe('UserController', function() {
         })
         .expect(200, done);
     });
-    it('should allow a user to access /index', function(done) {
-      request(sails.hooks.http.app)
-        .get('/index')
-        .expect(200 , done);
-    });
+
+    // it('should allow a user to access /index', function(done) {
+    //   request(sails.hooks.http.app)
+    //     .get('/index')
+    //     .expect(200 , done);
+    // });
   });
 
 });

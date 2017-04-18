@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Launch",
             "type": "node",
@@ -25,13 +26,14 @@
             "name": "Attach",
             "type": "node",
             "request": "attach",
-            "port": 5858,
+            "port": 9229,
             "address": "localhost",
             "restart": false,
             "sourceMaps": false,
             "outDir": null,
             "localRoot": "${workspaceRoot}",
-            "remoteRoot": null
+            "remoteRoot": null,
+            "protocol": "auto"
         },
         {
             "name": "Attach to Process",
