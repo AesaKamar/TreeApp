@@ -1,20 +1,35 @@
 <div>
     <style>
-        #form {
+        .form {
             padding: 10px;
             padding-left: 25px;
         }
+
+        #saveRelation {
+            padding-top: 10px;
+        }
+
+        #savePeople {
+            text-align: center;
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+
+        #nameField {
+            width: 40%;
+            border-radius: 4px;
+        }
     </style>
     <body>
-        <div id="form">
+        <div class="form" id="savePeople">
             Add a person to your tree:
-            <form>
+            <form id="saveRelation">
                 <!-- On save, send to db -->
-                Name: <input type="text" name="firstname"> <input type="submit" value="Save">
+                Name: <input type="text" name="firstname" id='nameField'> <input type="submit" value="Save">
             </form>
         </div>
-        <hr>
-        <div id="form">
+        <div class="form">
             <!-- This section should show most recent people added, and offer the ability -->
             <!-- to add a relation for the new family member to other people in the list -->
             Recently added people:

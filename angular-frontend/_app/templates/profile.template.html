@@ -1,16 +1,32 @@
+<style>
+    input {
+        width: 40%;
+        border-radius: 4px;
+        text-align: center;
+        margin: 5px;
+    }
+
+    #userInformation {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        text-align: center;
+    }
+
+    #passButton {
+        margin: 5px;
+    }
+</style>
+
 <div>
-    <style>
-        #email {
-            padding: 10px;
-            padding-left: 25px;
-        }
-        #passButton {
-            position: absolute;
-            left: 25px;
-        }
-    </style>
     <body>
-        <h3 id="email">You are logged in as: {{userInformation.email}}</h3>
-        <button id="passButton">Reset password</button>
+        <div id=userInformation>
+            <h3 id="email">You are logged in as: {{userInformation.email}}</h3>
+            <div id="passSection">
+                <input type="password" name="psw" placeholder="new password"><br>
+                <input type="password" name="psw2" placeholder="repeat password"><br>
+                <button id="passButton">Reset password</button>
+            </div>
+        </div>
     </body>
 </div>
