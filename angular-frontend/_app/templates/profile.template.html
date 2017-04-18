@@ -1,16 +1,31 @@
 <div>
-    <style>
-        #email {
-            padding: 10px;
-            padding-left: 25px;
-        }
-        #passButton {
-            position: absolute;
-            left: 25px;
-        }
-    </style>
-    <body>
-        <h3 id="email">You are logged in as: {{userInformation.email}}</h3>
-        <button id="passButton">Reset password</button>
-    </body>
+    <md-content style="width: 60%">
+    <md-card>
+       <md-card-title>
+         <md-card-title-text>
+           <span class="md-headline">Profile Information</span>
+           <span class="md-subhead"><b>Email:</b> {{userInformation.email}}</span>
+           <span class="md-subhead"><b>Password:</b> {{userInformation.password}}</span>
+         </md-card-title-text>
+         <md-card-title-media>
+             <div class="md-media-md card-media">
+                  <img height="50" width="30" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"/>
+             </div>
+         </md-card-title-media>
+       </md-card-title>
+       <md-card-actions layout="row" layout-align="start center">
+         <md-button>Change Email</md-button>
+         <md-button>Change Password</md-button>
+         <md-button>Change Image</md-button>
+       </md-card-actions>
+     </md-card>
+     </md-content>
 </div>
+<style>
+md-content{
+    width: 60%;
+}
+md-card{
+    background-color: #616161;
+}
+</style>
