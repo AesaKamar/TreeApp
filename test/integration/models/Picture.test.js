@@ -71,12 +71,12 @@ describe('PictureModel', function() {
     In this test, we find those 100 people who have a last name of 'fixture'
     Once we find them, we create a random emoji picture.
 
-    We will later have to create tags to tag the users in the picture
+    We will later have to create tags to tag the person in the picture
 
     */
     describe('Creating fixtures', function() {
-        it('should create a single picture for each user already created, totaling 100', function(done) {
-            //THe only reason we create a user is to satisfy the owner requirement on picture
+        it('should create a single picture for each person already created, totaling 100', function(done) {
+            //The only reason we create a user is to satisfy the owner requirement on picture
             User.create({
                 email: uuid.v4() + '@email.com',
                 password: uuid.v4() + 'password'
