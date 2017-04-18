@@ -4,7 +4,7 @@
 </md-input-container>
 <md-list id="list">
   <md-list-item class="md-2-line contact-item" ng-repeat="person in People | filter:personFilter | orderBy: 'first_name'">
-    <img ng-src="{{person.image}}" class="md-avatar" alt="{{person.name}}" />
+    <img data-ng-src="data:image/png;base64,{{person.image}}" class="md-avatar" alt="{{person.name}}" />
     <div class="md-list-item-text compact">
       <h3>{{person.first_name}}</h3>
       <p>{{person.last_name}}</p>
@@ -29,6 +29,8 @@
     background-color: #616161;
     border-radius: 7px;
     margin-top: 0px;
+    height: 500px;
+    overflow-y: scroll;
 }
 .md-2-line:hover{
     opacity: 0.75;
@@ -37,7 +39,7 @@
     opacity: .75;
 }
 .spacer{
-    width: 75px;
+    width: 150px;
 }
 md-input-container{
     margin-bottom: 0px;

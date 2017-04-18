@@ -15,10 +15,10 @@
             this.$onInit = function() {
                 vm.currentNavItem = "/profile";
                 $scope.navItems = [
-                    {label: "Login", route: 'login'},
                     {label: "Profile", route: 'profile'},
                     {label: "People", route: 'people'},
-                    {label: "Graph", route: 'graph'}
+                    {label: "Graph", route: 'graph'},
+                    {label: "Login", route: 'login'}
                 ]
             }
 

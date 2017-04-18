@@ -70,20 +70,20 @@ describe('RelationModel', function() {
         it('should create a family', function(done) {
             Promise.all([
                     Person.create({
-                        first_name: 'Apple',
-                        last_name: 'Flowers'
+                        first_name: 'Darth',
+                        last_name: 'Tragedy'
                     }),
                     Person.create({
-                        first_name: 'Banana',
-                        last_name: 'Flowers'
+                        first_name: 'Plageus',
+                        last_name: 'Tragedy'
                     }),
                     Person.create({
-                        first_name: 'Carrot',
-                        last_name: 'Flowers'
+                        first_name: 'The',
+                        last_name: 'Tragedy'
                     }),
                     Person.create({
-                        first_name: 'Debby',
-                        last_name: 'Flowers'
+                        first_name: 'Wise',
+                        last_name: 'Tragedy'
                     })
                 ])
                 .then(Person.count()).then(function(res) {
@@ -129,26 +129,26 @@ describe('RelationModel', function() {
     /*NOTE FOR GINKO DEVS ON Test fixtures
 
     You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
-    I tried to use this pattern in the other models's tests as well. 
+    I tried to use this pattern in the other models's tests as well.
 
-    We have a fixture in Person.test.js that creates 100 person objects. 
+    We have a fixture in Person.test.js that creates 100 person objects.
     In this test, we find those 100 people who have a last name of 'fixture'
-    
+
     We need to represent the idea of a family, so we group the list of 100 People into groups of 5
-    for each group of 5, we will create relations between each of them. 
+    for each group of 5, we will create relations between each of them.
     *Technical note*: The set of relations in one family is equal to the cartesian product of a family group with itself with a unique source and target
 
-    Once we have all the relations, we just create them. 
+    Once we have all the relations, we just create them.
 
     */
     describe('Create fixtures', function() {
         it('should create loosely coupled nuclear family structures', (done) => {
             Promise.all(Person.find({ last_name: "fixture" }).sort('id ASC'))
                 .then((persons) => {
-                    //Arrange all the persons into groups of 5. 
+                    //Arrange all the persons into groups of 5.
                     //Resolve the unique permutations of each chunked group of people
                     let chunkedFamilyGroups = _.chunk(persons, 5);
-                    //Need to create relations between each pair 
+                    //Need to create relations between each pair
                     let familyRelationsToCreate = _.map(chunkedFamilyGroups, (family) => {
                         let familyById = _.map(family, (member) => member.id)
                         let allPermutations = testHelper.cartesianProduct(familyById, familyById);
@@ -185,12 +185,12 @@ describe('RelationModel', function() {
                     //Keep a randn group of 30 People
                     let randomSubsetOfPeople = _(persons)
                         .shuffle()
-                        .take(30)
+                        .take(14)
                         .value();
                     //Marry them off into pairs
                     let coupledPairs = _.chunk(randomSubsetOfPeople, 2)
 
-                    //Generate 
+                    //Generate
                     let marriageRelationsToCreate = _.map(coupledPairs, (family) => {
                         let familyById = _.map(family, (member) => member.id)
                         let allPermutations = testHelper.cartesianProduct(familyById, familyById);

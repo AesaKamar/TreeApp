@@ -42,25 +42,25 @@
             The ngResource modules resemble the Models in Sails, and they are defined in angular in the dataservices folder
 
             The methods it provides are
-            { 
+            {
                 'get':    {method:'GET'},
                 'query':  {method:'GET', isArray:true},
                 'update': {method:'PUT'}
                 'save':   {method:'POST'},
                 'remove': {method:'DELETE'},
-                'delete': {method:'DELETE'} 
+                'delete': {method:'DELETE'}
             };
 
-            Additionally, we can pass an object into the methods and it'll get passed up to the API correctly. 
+            Additionally, we can pass an object into the methods and it'll get passed up to the API correctly.
 
             */
-            Person.query({ last_name: "fixture", limit: 100 }, (data) => {
+            Person.query({ last_name: "fixture", limit: 50 }, (data) => {
                 let additions = data;
                 vm.GraphContainer.PersonNodes = _.concat(vm.GraphContainer.PersonNodes, additions)
                     // console.log(vm.GraphContainer);
                 restart();
             });
-            Relation.query({ classification: "fixture_nuclear", limit: 500 }, (data) => {
+            Relation.query({ classification: "fixture_nuclear", limit: 250 }, (data) => {
                 // console.log(data)
                 let additions = _.map(data, (e) => {
                     return {
@@ -73,7 +73,7 @@
                 restart();
             });
 
-            Relation.query({ classification: "fixture_marriage", limit: 100 }, (data) => {
+            Relation.query({ classification: "fixture_marriage", limit: 50 }, (data) => {
                 // console.log(data)
                 let additions = _.map(data, (e) => {
                     return {
@@ -84,6 +84,7 @@
                 vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
                     // console.log(vm.GraphContainer.RelationLinks);
                 restart();
+                console.log(vm.GraphContainer.PersonNodes);
             });
 
             /**
@@ -98,7 +99,7 @@
 
             Graph perfmorance is brittle and not optimized. So the force simulation will probably break
             after a few seconds of running
-                                                             
+
              */
 
 
@@ -117,9 +118,9 @@
                 RelationLinks: []
             };
 
-            Once the are added, call restart to have d3 update the fraph and start the simulation again to lay them out. 
+            Once the are added, call restart to have d3 update the fraph and start the simulation again to lay them out.
 
-            d3 can accept any objects as nodes as long as they have a field called 'id' 
+            d3 can accept any objects as nodes as long as they have a field called 'id'
             {id: 'something'}
 
             d3 can accept any objects as links as well as long as they have fields calle 'source' and 'target'
@@ -131,39 +132,86 @@
                 .attr('width', width)
                 .attr('height', height);
 
+            //to ensure nodes are drawn on top of links
+            svg.append("g").attr("id", "links")
+            svg.append("g").attr("id", "nodes")
+
             // use the force
             let restart = () => {
                 var force = d3.layout.force()
                     .size([width, height])
-                    .nodes(d3.values(vm.GraphContainer.PersonNodes))
                     .links(vm.GraphContainer.RelationLinks)
-                    .on("tick", tick)
+                    .nodes(d3.values(vm.GraphContainer.PersonNodes))
+                    .gravity(0.05)
                     .linkDistance(100)
-                    .charge(-300)
+                    .charge(-200)
+                    .linkStrength(1)
+                    .on("tick", tick)
                     .start();
 
-                // setup link definition
-                var link = svg.selectAll('.link')
-                    .data(vm.GraphContainer.RelationLinks)
-                    .enter().append('line')
-                    .attr('class', 'link');
-
                 // setup node definition
-                var node = svg.selectAll('.node')
+                var node = svg.select("#nodes").selectAll('.node')
                     .data(force.nodes())
                     .enter().append('g')
                     .attr('class', 'node')
                     .call(force.drag);
 
 
-                node.append('image')
-                    .attr('xlink:href', (d) => "http://www.iconshock.com/img_vista/FLAT/food/jpg/banana_icon.jpg")
-                    .attr("x", (d) => -25)
-                    .attr("y", (d) => -25)
-                    .attr("height", 50)
-                    .attr("width", 50);
+                node.append("text")
+                    .attr("class", "nodetext")
+                    .attr("x", 20)
+                    .attr("y", 40)
+                    .attr("fill", '#fdfdfd')
+                    .text(function(d) { return d.first_name; });
 
-                // tick function to create curved lines and move things around    
+                // node.append("svg:circle")
+                //     .attr("r", 4.5)
+                //     .style("fill", "#eee");
+
+                let img1 = 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-256.png';
+                let img2 = 'http://carmeldhanbad.com/site/images/flat-faces-icons-circle-16.png';
+                let img3 ='http://www.iconsfind.com/wp-content/uploads/2016/10/20161014_58006befd3376.png';
+                let img4 = 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-5-512.png';
+
+                var images = node.append("svg:image")
+                   .attr("xlink:href", function(){
+                                           var imgarr = [img1, img2, img3, img4];
+                                           return imgarr[Math.floor(Math.random()*imgarr.length)];
+                                       })
+                   .attr("x", function(d) { return -25;})
+                   .attr("y", function(d) { return -25;})
+                   .attr("height", 50)
+                   .attr("width", 50);
+
+                var setEvents = images
+                     .on( 'mouseenter', function() {
+                       // select element in current context
+                       d3.select( this )
+                         .transition()
+                         .attr("x", function(d) { return -60;})
+                         .attr("y", function(d) { return -60;})
+                         .attr("height", 100)
+                         .attr("width", 100);
+                     })
+
+                     // set back
+                     .on( 'mouseleave', function() {
+                       d3.select( this )
+                         .transition()
+                         .attr("x", function(d) { return -25;})
+                         .attr("y", function(d) { return -25;})
+                         .attr("height", 50)
+                         .attr("width", 50);
+                     });
+
+                // setup link definition
+                var link = svg.select("#links").selectAll('.link')
+                    .data(vm.GraphContainer.RelationLinks)
+                    .enter().append('line')
+                    .attr('class', 'link');
+
+
+                // tick function to create curved lines and move things around
                 function tick(e) {
                     link.attr('x1', (d) => d.source.x)
                         .attr('y1', (d) => d.source.y)

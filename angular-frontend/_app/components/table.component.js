@@ -9,8 +9,22 @@
         },
         templateUrl: "_app/templates/table.template.html",
         styles: ['div { background-color: #fdfdfd; }'],
-        controller: ['$scope', function($scope) {
-            $scope.People = [{'first_name': "Hank", 'last_name': "Snuffalufogus", 'image': "http://www.eyeglassboy.com/images/1bobdylan.jpg"}, {'first_name': "Bob",'last_name': "Dylan", 'image': "http://www.eyeglassboy.com/images/1bobdylan.jpg"}, {'first_name': "Darlene",'last_name': "Darlano", 'image': "http://www.eyeglassboy.com/images/1bobdylan.jpg"}, {'first_name': "Billy",'last_name': "TheAdult", 'image': "http://www.eyeglassboy.com/images/1bobdylan.jpg"},{'first_name': "Billy",'last_name': "TheKid", 'image': "http://www.eyeglassboy.com/images/1bobdylan.jpg"}]
+        controller: ['$scope','$window', 'Picture', 'Person', 'Relation', 'Tag', function($scope, $window, Picture, Person, Relation, Tag) {
+
+            $scope.People = [];
+            Person.query({ last_name: "fixture", limit: 50 }, (data) => {
+                Picture.query({ description: "fixture", limit: 50 }, (pics) => {
+                    for (var i = 0; i< 50; i++){
+                        let namearr = data[i].first_name.split(" ");
+                        let person = {
+                            first_name: namearr[0],
+                            last_name: namearr[1],
+                            image: pics[i].image_string
+                        }
+                        $scope.People.push(person);
+                    }
+                });
+            });
 
             $scope.query = '';
 

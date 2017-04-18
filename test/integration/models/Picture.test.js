@@ -65,18 +65,18 @@ describe('PictureModel', function() {
     /*NOTE FOR GINKO DEVS ON Test fixtures
 
     You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
-    I tried to use this pattern in the other models's tests as well. 
+    I tried to use this pattern in the other models's tests as well.
 
-    We have a fixture in Person.test.js that creates 100 person objects. 
+    We have a fixture in Person.test.js that creates 100 person objects.
     In this test, we find those 100 people who have a last name of 'fixture'
-    Once we find them, we create a random emoji picture. 
+    Once we find them, we create a random emoji picture.
 
-    We will later have to create tags to tag the users in the picture
+    We will later have to create tags to tag the person in the picture
 
     */
     describe('Creating fixtures', function() {
-        it('should create a single picture for each user already created, totaling 100', function(done) {
-            //THe only reason we create a user is to satisfy the owner requirement on picture
+        it('should create a single picture for each person already created, totaling 100', function(done) {
+            //The only reason we create a user is to satisfy the owner requirement on picture
             User.create({
                 email: uuid.v4() + '@email.com',
                 password: uuid.v4() + 'password'
@@ -112,7 +112,7 @@ describe('PictureModel', function() {
                                 //This results block should be a promise array of created pictures
                             Promise.all(results).then(
                                 (createdPictureArray) => {
-                                    assert(createdPictureArray.length > 99)
+                                    assert(createdPictureArray.length > 4)
                                     _(createdPictureArray)
                                         .forEach((picture_i) => {
                                             assert(picture_i.image_string)

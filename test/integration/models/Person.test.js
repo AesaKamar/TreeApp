@@ -69,7 +69,7 @@ describe('PersonModel', function() {
     /*NOTE FOR GINKO DEVS ON Test fixtures
 
     You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
-    I tried to use this pattern in the other models's tests as well. 
+    I tried to use this pattern in the other models's tests as well.
 
     In this test, we are creating 100 Person objects with a random first name, and a last name of 'fixture'
     The last name just helps us to search for this data later
@@ -78,7 +78,7 @@ describe('PersonModel', function() {
     describe('Creating fixtures', function() {
         it('should create 100 random people', function(done) {
             var promise_array = [];
-            _.times(100, function() {
+            _.times(50, function() {
                 promise_array.push(
                     Person.create({
                         first_name: faker.name.findName(),
@@ -89,7 +89,7 @@ describe('PersonModel', function() {
             Promise.all(promise_array)
                 .then(function() {
                     Person.count({ last_name: "fixture" }).then(function(count) {
-                        assert(count > 99);
+                        assert(count > 49);
                     });
                 })
                 .then(done())
