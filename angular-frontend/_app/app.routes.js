@@ -26,12 +26,7 @@
                 views: {
                     "login": {
                         template: `<login></login>`,
-                        resolve: {
-                            //Any promises that need to be injected via a dataservice
-                            // userlist: (UserService) => {
-                            //     return UserService.list();
-                            // }
-                        }
+                        resolve: {}
                     }
                 },
             })
@@ -40,9 +35,7 @@
                 views: {
                     "profile": {
                         template: `<profile></profile>`,
-                        resolve: {
-
-                        }
+                        resolve: {}
                     }
                 },
             })
@@ -51,9 +44,7 @@
                 views: {
                     "people": {
                         template: `<people></people>`,
-                        resolve: {
-
-                        }
+                        resolve: {}
                     }
                 }
             });
