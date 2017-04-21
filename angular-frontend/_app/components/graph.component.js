@@ -58,7 +58,8 @@
                 let additions = data;
                 vm.GraphContainer.PersonNodes = _.concat(vm.GraphContainer.PersonNodes, additions)
                     // console.log(vm.GraphContainer);
-                restart();
+                    update();
+                //restart();
             });
             Relation.query({ classification: "fixture_nuclear", limit: 250 }, (data) => {
                 // console.log(data)
@@ -69,8 +70,23 @@
                     }
                 });
                 vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
-                    // console.log(vm.GraphContainer.RelationLinks);
-                restart();
+                //To remove duplicate edges (A -> B) == (B -> A), uncomment out this section
+                // let toremove = [];
+                // for (let i = 0; i<vm.GraphContainer.RelationLinks.length; i++){
+                //     let src = vm.GraphContainer.RelationLinks[i].source;
+                //     let trgt = vm.GraphContainer.RelationLinks[i].target;
+                //     for (let j = i; j<vm.GraphContainer.RelationLinks.length; j++){
+                //         let curr = vm.GraphContainer.RelationLinks[j];
+                //         if (curr.source === trgt && curr.target === src){
+                //             toremove.push(j);
+                //         }
+                //     }
+                // }
+                // for (let g = 0; g < toremove.length; g++){
+                //     vm.GraphContainer.RelationLinks.splice(toremove[g]-g,1);
+                //     console.log("duplicate removed");
+                // }
+                update();
             });
 
             Relation.query({ classification: "fixture_marriage", limit: 50 }, (data) => {
@@ -82,9 +98,7 @@
                     }
                 });
                 vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
-                    // console.log(vm.GraphContainer.RelationLinks);
-                restart();
-                console.log(vm.GraphContainer.PersonNodes);
+                update();
             });
 
             /**
@@ -99,6 +113,9 @@
 
             Graph perfmorance is brittle and not optimized. So the force simulation will probably break
             after a few seconds of running
+
+            After Update! - the graph performance is no longer brittle, however links do not properly draw.
+            The graph behaves properly, but links do not draw correctly due to how many there are (I think).
 
              */
 
@@ -136,96 +153,109 @@
             svg.append("g").attr("id", "links")
             svg.append("g").attr("id", "nodes")
 
-            // use the force
-            let restart = () => {
-                var force = d3.layout.force()
-                    .size([width, height])
+            var force = d3.layout.force();
+
+            function update() {
+                //console.log(vm.GraphContainer.RelationLinks.length);
+
+                // Restart the force layout.
+                force.nodes(vm.GraphContainer.PersonNodes)
                     .links(vm.GraphContainer.RelationLinks)
-                    .nodes(d3.values(vm.GraphContainer.PersonNodes))
-                    .gravity(0.05)
+                    .charge(-750)
                     .linkDistance(100)
-                    .charge(-200)
-                    .linkStrength(1)
+                    .friction(0.5)
+                    .linkStrength(2)
+                    .size([width, height])
                     .on("tick", tick)
                     .start();
 
-                // setup node definition
-                var node = svg.select("#nodes").selectAll('.node')
-                    .data(force.nodes())
-                    .enter().append('g')
-                    .attr('class', 'node')
-                    .call(force.drag);
-
-
-                node.append("text")
-                    .attr("class", "nodetext")
-                    .attr("x", 20)
-                    .attr("y", 40)
-                    .attr("fill", '#fdfdfd')
-                    .text(function(d) { return d.first_name; });
-
-                // node.append("svg:circle")
-                //     .attr("r", 4.5)
-                //     .style("fill", "#eee");
-
-                let img1 = 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-256.png';
-                let img2 = 'http://carmeldhanbad.com/site/images/flat-faces-icons-circle-16.png';
-                let img3 ='http://www.iconsfind.com/wp-content/uploads/2016/10/20161014_58006befd3376.png';
-                let img4 = 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-5-512.png';
-
-                var images = node.append("svg:image")
-                   .attr("xlink:href", function(){
-                                           var imgarr = [img1, img2, img3, img4];
-                                           return imgarr[Math.floor(Math.random()*imgarr.length)];
-                                       })
-                   .attr("x", function(d) { return -25;})
-                   .attr("y", function(d) { return -25;})
-                   .attr("height", 50)
-                   .attr("width", 50);
-
-                var setEvents = images
-                     .on( 'mouseenter', function() {
-                       // select element in current context
-                       d3.select( this )
-                         .transition()
-                         .attr("x", function(d) { return -60;})
-                         .attr("y", function(d) { return -60;})
-                         .attr("height", 100)
-                         .attr("width", 100);
-                     })
-
-                     // set back
-                     .on( 'mouseleave', function() {
-                       d3.select( this )
-                         .transition()
-                         .attr("x", function(d) { return -25;})
-                         .attr("y", function(d) { return -25;})
-                         .attr("height", 50)
-                         .attr("width", 50);
-                     });
-
-                // setup link definition
+                //add links
                 var link = svg.select("#links").selectAll('.link')
                     .data(vm.GraphContainer.RelationLinks)
                     .enter().append('line')
                     .attr('class', 'link');
 
+                  // Update the nodes…
+                  var node = svg.select("#nodes").selectAll('.node')
+                      .data(vm.GraphContainer.PersonNodes, function(d) { return d.id; });
 
-                // tick function to create curved lines and move things around
-                function tick(e) {
-                    link.attr('x1', (d) => d.source.x)
-                        .attr('y1', (d) => d.source.y)
-                        .attr('x2', (d) => d.target.x)
-                        .attr('y2', (d) => d.target.y);
+                  // Enter any new nodes.
+                  var nodeEnter = node.enter().append("svg:g")
+                      .attr("class", "node")
+                      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+                      .call(force.drag);
 
-                    node.attr("transform", function(d) {
-                        return "translate(" + d.x + "," + d.y + ")";
-                    });
-                }
+                  let img1 = 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-3-256.png';
+                  let img2 = 'http://carmeldhanbad.com/site/images/flat-faces-icons-circle-16.png';
+                  let img3 ='http://www.iconsfind.com/wp-content/uploads/2016/10/20161014_58006befd3376.png';
+                  let img4 = 'https://cdn4.iconfinder.com/data/icons/avatars-21/512/avatar-circle-human-male-5-512.png';
+
+                  // Append images
+                  var images = nodeEnter.append("svg:image")
+                        .attr("xlink:href",  function(){
+                                                var imgarr = [img1, img2, img3, img4];
+                                                return imgarr[Math.floor(Math.random()*imgarr.length)];
+                                         })
+                        .attr("x", function(d) { return -25;})
+                        .attr("y", function(d) { return -25;})
+                        .attr("height", 50)
+                        .attr("width", 50);
+
+                  // make the image grow a little on mouse over and add the text details on click
+                  var setEvents = images
+                          .on( 'mouseenter', function() {
+                            // select element in current context
+                            d3.select( this )
+                              .transition()
+                              .attr("x", function(d) { return -60;})
+                              .attr("y", function(d) { return -60;})
+                              .attr("height", 100)
+                              .attr("width", 100);
+                          })
+                          // set back
+                          .on( 'mouseleave', function() {
+                            d3.select( this )
+                              .transition()
+                              .attr("x", function(d) { return -25;})
+                              .attr("y", function(d) { return -25;})
+                              .attr("height", 50)
+                              .attr("width", 50);
+                          });
+
+                    node.append("text")
+                        .attr("class", "nodetext")
+                        .attr("x", 20)
+                        .attr("y", 40)
+                        .attr("fill", '#fdfdfd')
+                        .text(function(d) { return d.first_name; });
+
+
+                    // Exit any old nodes.
+                    node.exit().remove();
+
+
+                    // Re-select for update.
+                    node = svg.select("#nodes").selectAll('.node');
+
+                    function tick() {
+                        link.attr('x1', (d) => d.source.x)
+                            .attr('y1', (d) => d.source.y)
+                            .attr('x2', (d) => d.target.x)
+                            .attr('y2', (d) => d.target.y);
+
+                        node.attr("transform", nodeTransform);
+                    }
             }
-            restart();
 
 
+            //keeps nodes in bounds
+            function nodeTransform(d) {
+                d.x =  Math.max(50, Math.min(width - (50/2 || 16), d.x));
+                d.y =  Math.max(50, Math.min(height - (50/2 || 16), d.y));
+                return "translate(" + d.x + "," + d.y + ")";
+            }
+
+            update();
         }]
 
     });

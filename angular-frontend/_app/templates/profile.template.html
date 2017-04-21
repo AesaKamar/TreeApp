@@ -41,10 +41,35 @@
              </div>
          </md-card-title-media>
        </md-card-title>
+       <form ng-show="changeEmail" ng-submit="submitEmail()">
+           <md-input-container class="md-input-had-value">
+               <label for="email">New Email</label>
+               <input type="email" ng-model="newEmail" id="email" required/>
+           </md-input-container>
+           <button class="md-button md-ink-ripple" type="submit">
+               <span>SUBMIT</span>
+           </button>
+       </form>
+       <form ng-show="changePass" ng-submit="submitPass()">
+           <md-input-container ng-show="changePass" class="md-input-had-value">
+               <label for="pass">New Password</label>
+               <input type="password" ng-model="newPass" id="pass" required/>
+           </md-input-container>
+           <md-input-container class="md-input-had-value">
+               <input id="newImage" name="file" type="file" class="ng-hide">
+           </md-input-container>
+           <button class="md-button md-ink-ripple" type="submit">
+               <span>SUBMIT</span>
+           </button>
+       </form>
+       <div id="message" class="alert alert-success" data-ng-show="message" data-ng-bind="message"></div>
        <md-card-actions layout="row" layout-align="start center">
-         <md-button>Change Email</md-button>
-         <md-button>Change Password</md-button>
-         <md-button>Change Image</md-button>
+         <md-button ng-click="toggle(1)">Change Email</md-button>
+         <md-button ng-click="toggle(2)">Change Password</md-button>
+         <md-button ng-click="propogate()">Change Image</md-button>
+
+
+
        </md-card-actions>
      </md-card>
      </md-content>

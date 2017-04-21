@@ -1,64 +1,47 @@
-<style>
-.form {
-    padding: 10px;
-    padding-left: 25px;
-}
-
-.container {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-}
-
-#saveRelation {
-    padding-top: 10px;
-}
-
-#savePeople {
-    text-align: center;
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-}
-
-#nameField {
-    width: 40%;
-    border-radius: 4px;
-}
-</style>
-
-<body>
-    <div class="container" id="form">
-        <md-content>
-            <h2>Add a Person</h2>
-            <div>
-                <md-input-container class="md-input-had-value">
-                    <label for="first">First Name</label>
-                    <input class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="first" style/>
-                </md-input-container>
-                <md-input-container class="md-input-had-value">
-                    <label for="middle">Middle Name</label>
-                    <input class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="middle" style/>
-                </md-input-container>
-                <md-input-container class="md-input-had-value">
-                    <label for="first">Last Name</label>
-                    <input class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="last" style/>
-                </md-input-container>
-                <md-input-container class="_md-datepicker-floating-label _md-datepicker-has-calendar-icon">
-                    <label for="birthdate">Date of Birth</label>
-                    <md-datepicker ng-model="birthDate" id="birthdate"></md-datepicker>
-                </md-input-container>
-                <button class="md-button md-ink-ripple" type="submit">
-                    <span>SUBMIT</span>
-                </button>
-            </div>
-        </md-content>
-    </div>
-    <hr>
-    <div class="container" id="form">
-        <!-- This section should show most recent people added, and offer the ability -->
-        <!-- to add a relation for the new family member to other people in the list -->
-        <h2>Your People</h2>
-        <table></table>
-    </div>
-</body>
+    <style>
+        #form {
+            padding: 10px;
+            padding-left: 25px;
+        }
+        .container {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        {
+    </style>
+    <body>
+        <div class="container" id="form">
+            <md-content>
+                <h2>Add a Person</h2>
+                <form ng-submit="submit()">
+                    <md-input-container class="md-input-had-value">
+                        <label for="first">First Name</label>
+                        <input type="text" ng-model="first_name" id="first" required/>
+                    </md-input-container>
+                    <md-input-container class="md-input-had-value">
+                        <label for="middle">Middle Name</label>
+                        <input type="text" ng-model="middle_name" id="middle" style/>
+                    </md-input-container>
+                    <md-input-container class="md-input-had-value">
+                        <label for="first">Last Name</label>
+                        <input type="text" ng-model="last_name" id="last" required/>
+                    </md-input-container>
+                    <md-input-container class="_md-datepicker-floating-label _md-datepicker-has-calendar-icon">
+                        <label for="birthdate">Date of Birth</label>
+                        <md-datepicker ng-model="birth_date" id="birthdate"></md-datepicker>
+                    </md-input-container>
+                    <button class="md-button md-ink-ripple" type="submit">
+                        <span>SUBMIT</span>
+                    </button>
+                    <div id="message" class="alert alert-success" data-ng-show="message" data-ng-bind="message"></div>
+                </form>
+            </md-content>
+        </div>
+        <hr>
+        <div class="container" id="form">
+            <!-- This section should show most recent people added, and offer the ability -->
+            <!-- to add a relation for the new family member to other people in the list -->
+            <h2>Your People</h2>
+            <table></table>
+        </div>
+    </body>
