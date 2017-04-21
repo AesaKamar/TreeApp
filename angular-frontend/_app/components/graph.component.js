@@ -70,6 +70,22 @@
                     }
                 });
                 vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
+                //To remove duplicate edges (A -> B) == (B -> A), uncomment out this section
+                // let toremove = [];
+                // for (let i = 0; i<vm.GraphContainer.RelationLinks.length; i++){
+                //     let src = vm.GraphContainer.RelationLinks[i].source;
+                //     let trgt = vm.GraphContainer.RelationLinks[i].target;
+                //     for (let j = i; j<vm.GraphContainer.RelationLinks.length; j++){
+                //         let curr = vm.GraphContainer.RelationLinks[j];
+                //         if (curr.source === trgt && curr.target === src){
+                //             toremove.push(j);
+                //         }
+                //     }
+                // }
+                // for (let g = 0; g < toremove.length; g++){
+                //     vm.GraphContainer.RelationLinks.splice(toremove[g]-g,1);
+                //     console.log("duplicate removed");
+                // }
                 update();
             });
 
@@ -140,7 +156,7 @@
             var force = d3.layout.force();
 
             function update() {
-                console.log(vm.GraphContainer.RelationLinks.length);
+                //console.log(vm.GraphContainer.RelationLinks.length);
 
                 // Restart the force layout.
                 force.nodes(vm.GraphContainer.PersonNodes)
