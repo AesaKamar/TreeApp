@@ -57,9 +57,7 @@
             Person.query({ last_name: "fixture", limit: 50 }, (data) => {
                 let additions = data;
                 vm.GraphContainer.PersonNodes = _.concat(vm.GraphContainer.PersonNodes, additions)
-                    // console.log(vm.GraphContainer);
-                    update();
-                //restart();
+                update();
             });
             Relation.query({ classification: "fixture_nuclear", limit: 250 }, (data) => {
                 // console.log(data)
@@ -70,7 +68,19 @@
                     }
                 });
                 vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
+                Relation.query({ classification: "fixture_marriage", limit: 50 }, (data) => {
+                    // console.log(data)
+                    let moreadditions = _.map(data, (e) => {
+                        return {
+                            source: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_from === _person.id),
+                            target: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_to === _person.id),
+                        }
+                    });
+                    vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, moreadditions)
+                    update();
+                });
                 //To remove duplicate edges (A -> B) == (B -> A), uncomment out this section
+                //NOTE: This will look better when relations are parent-child only rather than pairwise as they are now
                 // let toremove = [];
                 // for (let i = 0; i<vm.GraphContainer.RelationLinks.length; i++){
                 //     let src = vm.GraphContainer.RelationLinks[i].source;
@@ -86,20 +96,9 @@
                 //     vm.GraphContainer.RelationLinks.splice(toremove[g]-g,1);
                 //     console.log("duplicate removed");
                 // }
-                update();
             });
 
-            Relation.query({ classification: "fixture_marriage", limit: 50 }, (data) => {
-                // console.log(data)
-                let additions = _.map(data, (e) => {
-                    return {
-                        source: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_from === _person.id),
-                        target: _.findIndex(vm.GraphContainer.PersonNodes, (_person) => e.related_to === _person.id),
-                    }
-                });
-                vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, additions)
-                update();
-            });
+
 
             /**
             ##:::::'##::::'###::::'########::'##::: ##:'####:'##::: ##::'######:::
