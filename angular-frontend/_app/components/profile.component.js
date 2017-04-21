@@ -8,7 +8,7 @@
             screen: "<"
         },
         templateUrl: "_app/templates/profile.template.html",
-        controller: ['$window', '$scope', function($window, $scope) {
+        controller: ['$window', '$scope', '$element', function($window, $scope, $element) {
             this.$onInit = function() {
                 $scope.userInformation = {email: "DarthPlagueis@gmail.com", password: "hunter2"}
             }
@@ -61,6 +61,11 @@
                     $scope.val = num;
                 }
                 $scope.message="";
+            }
+
+            $scope.propogate = function(){
+                let fupload = $element.find('#newImage');
+                fupload.click();
             }
 
             console.log("In Profile Component");

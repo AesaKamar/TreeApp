@@ -27,6 +27,9 @@
                <label for="pass">New Password</label>
                <input type="password" ng-model="newPass" id="pass" required/>
            </md-input-container>
+           <md-input-container class="md-input-had-value">
+               <input id="newImage" name="file" type="file" class="ng-hide">
+           </md-input-container>
            <button class="md-button md-ink-ripple" type="submit">
                <span>SUBMIT</span>
            </button>
@@ -35,7 +38,10 @@
        <md-card-actions layout="row" layout-align="start center">
          <md-button ng-click="toggle(1)">Change Email</md-button>
          <md-button ng-click="toggle(2)">Change Password</md-button>
-         <md-button>Change Image</md-button>
+         <md-button ng-click="propogate()">Change Image</md-button>
+
+
+
        </md-card-actions>
      </md-card>
      </md-content>
