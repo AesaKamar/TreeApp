@@ -8,10 +8,26 @@
             screen: "<"
         },
         templateUrl: "_app/templates/login.template.html",
-        controller: ['$window', function($window) {
-            this.$onInit = function() {
+        controller: ['$scope', '$window', function($scope, $window) {
+            $scope.action = "Log In";
+            $scope.actionMessage="Not Registered? Click Here!";
+            $scope.registration = false;
 
+            $scope.changeAction = function(){
+                if($scope.action == "Log In"){
+                    $scope.action = "Register";
+                    $scope.actionMessage="Already Registered? Click Here!";
+                    $scope.registration = true;
+                }
+                else{
+                    $scope.action = "Log In";
+                    $scope.actionMessage="Not Registered? Click Here!";
+                    $scope.registration = false;
+                }
             }
+
+
+
             console.log("In Login Component");
             $(window, document, undefined).ready(function() {
 
@@ -44,7 +60,7 @@
               });
 
               $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
-              	$(this).removeClass('is-active');
+                  $(this).removeClass('is-active');
               });
 
             });
