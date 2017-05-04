@@ -5,7 +5,7 @@
      * Initialize angular app
      */
     let app = angular.module(
-        'app', ['ngResource', 'ngMaterial', 'ui.router']
+        'app', ['ngTouch', 'ngAnimate', 'ngResource', 'ngMaterial', 'ui.router']
     );
 
     /**

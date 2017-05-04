@@ -39,6 +39,15 @@
                     }
                 },
             })
+            .state('gallery', {
+                url: '/gallery',
+                views: {
+                    "gallery": {
+                        template: `<gallery></gallery>`,
+                        resolve: {}
+                    }
+                },
+            })
             .state('people', {
                 url: '/people',
                 views: {
