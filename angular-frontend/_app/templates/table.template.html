@@ -16,7 +16,7 @@
     <md-button title="Add photo of {{person.first_name}}" class="md-secondary md-icon-button">
       <md-icon md-ink-ripple="#FFA500" md-font-library="material-icons">add_to_photos</md-icon>
     </md-button>
-    <md-button title="View photos of {{person.first_name}}" class="md-secondary md-icon-button">
+    <md-button title="View photos of {{person.first_name}}" class="md-secondary md-icon-button" ng-click="navigate('gallery')">
       <md-icon md-ink-ripple="#FFA500" md-font-library="material-icons">photo_library</md-icon>
     </md-button>
     <md-divider md-inset ng-if="!$last"></md-divider>

@@ -9,7 +9,7 @@
         },
         templateUrl: "_app/templates/table.template.html",
         styles: ['div { background-color: #fdfdfd; }'],
-        controller: ['$scope','$window', 'Picture', 'Person', 'Relation', 'Tag', function($scope, $window, Picture, Person, Relation, Tag) {
+        controller: ['$scope','$state', '$window', 'Picture', 'Person', 'Relation', 'Tag', function($scope, $state, $window, Picture, Person, Relation, Tag) {
 
             $scope.People = [];
             Person.query({ last_name: "fixture", limit: 50 }, (data) => {
@@ -32,6 +32,10 @@
                 var query = $scope.query.toLowerCase(),
                 name = person.first_name.toLowerCase() + ' ' + person.last_name.toLowerCase();
                 return name.indexOf(query) > -1;
+            };
+
+            $scope.navigate = function(url){
+                $state.go(url);
             };
 
             console.log("In table Component");
