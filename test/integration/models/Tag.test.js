@@ -129,8 +129,8 @@ describe('TagModel', function() {
         it('should delete a specific tag by tag id, unlink a person to a picture',
         (done)=>{
             Tag.destroy({id: 1})
-            .then(()=>{
-                assert()
+            .then((Target_tag)=>{
+                // assert(Target_tag.id == 1);
                 done();
             })
             .catch(done);
