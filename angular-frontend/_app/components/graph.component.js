@@ -153,8 +153,8 @@
             */
             // add a SVG to the body for our viz
             let svg = d3.select('#graph').append('svg')
-                .attr('width', width)
-                .attr('height', height);
+                .attr('width', "100%")
+                .attr('height', "100%");
 
             //to ensure nodes are drawn on top of links
             svg.append("g").attr("id", "links")
@@ -248,17 +248,7 @@
                             .attr('y1', (d) => d.source.y)
                             .attr('x2', (d) => d.target.x)
                             .attr('y2', (d) => d.target.y);
-
-                        node.attr("transform", nodeTransform);
                     }
-            }
-
-
-            //keeps nodes in bounds
-            function nodeTransform(d) {
-                d.x =  Math.max(50, Math.min(width - (50/2 || 16), d.x));
-                d.y =  Math.max(50, Math.min(height - (50/2 || 16), d.y));
-                return "translate(" + d.x + "," + d.y + ")";
             }
 
             update();
