@@ -9,7 +9,7 @@
         },
         templateUrl: "_app/templates/graph.template.html",
         /* We are inejcting the dataservices into the controller so we have access to them */
-        controller: ['$window', 'Picture', 'Person', 'Relation', 'Tag', function($window, Picture, Person, Relation, Tag) {
+        controller: ['$window', '$http', 'Picture', 'Person', 'Relation', 'Tag', function($window, $http, Picture, Person, Relation, Tag) {
             this.$onInit = function() {
 
                 console.log("In Graph Component");
@@ -31,6 +31,11 @@
                 PersonNodes: [],
                 RelationLinks: []
             };
+
+            /**
+             * Ensures updates get executed sequentially
+             */
+            vm.updating = Promise.resolve(true)
             //===============================
             //Build force simulation
             //===============================
@@ -54,12 +59,32 @@
             Additionally, we can pass an object into the methods and it'll get passed up to the API correctly.
 
             */
-            Person.query({ last_name: "fixture", limit: 50 }, (data) => {
-                let additions = data;
-                vm.GraphContainer.PersonNodes = _.concat(vm.GraphContainer.PersonNodes, additions)
-                update();
-            });
-            Relation.query({ classification: "fixture_nuclear", limit: 250 }, (data) => {
+            new Promise((resolve, reject) => {
+                Person.query({ last_name: "fixture", limit: 50 }, (data) => {
+                    let additions = data;
+                    vm.GraphContainer.PersonNodes = _.concat(vm.GraphContainer.PersonNodes, additions)
+                    // vm.updating.then(res => update(), err => {})
+                    resolve(data)
+                })
+            })
+            .then((people) => {
+                let peopleIds = people.map(x => x.id)
+                // console.log(people)
+                console.log(`/picture?where={"id":[${peopleIds}]}&limit=${peopleIds.length}`)
+                $http.get(`/picture?where={"id":[${peopleIds}]}&limit=${peopleIds.length}`).then(
+                    (pictures) => {
+                        console.log(pictures)
+                        for (let i = 0; i < vm.GraphContainer.PersonNodes.length; i++){
+                            vm.GraphContainer.PersonNodes[i].thumbnail = pictures.data[i].image_string
+                        }
+                        // console.log(_.map(vm.GraphContainer.PersonNodes, x => x.thumbnail))
+                        // update();
+                    },
+                    (err) => {}
+                )
+            }, 
+            (err)=> {});
+            Promise.resolve(Relation.query({ classification: "fixture_nuclear", limit: 250 }, (data) => {
                 // console.log(data)
                 let additions = _.map(data, (e) => {
                     return {
@@ -79,24 +104,7 @@
                     vm.GraphContainer.RelationLinks = _.concat(vm.GraphContainer.RelationLinks, moreadditions)
                     update();
                 });
-                //To remove duplicate edges (A -> B) == (B -> A), uncomment out this section
-                //NOTE: This will look better when relations are parent-child only rather than pairwise as they are now
-                // let toremove = [];
-                // for (let i = 0; i<vm.GraphContainer.RelationLinks.length; i++){
-                //     let src = vm.GraphContainer.RelationLinks[i].source;
-                //     let trgt = vm.GraphContainer.RelationLinks[i].target;
-                //     for (let j = i; j<vm.GraphContainer.RelationLinks.length; j++){
-                //         let curr = vm.GraphContainer.RelationLinks[j];
-                //         if (curr.source === trgt && curr.target === src){
-                //             toremove.push(j);
-                //         }
-                //     }
-                // }
-                // for (let g = 0; g < toremove.length; g++){
-                //     vm.GraphContainer.RelationLinks.splice(toremove[g]-g,1);
-                //     console.log("duplicate removed");
-                // }
-            });
+            }))
 
 
 
@@ -156,7 +164,7 @@
 
             function update() {
                 //console.log(vm.GraphContainer.RelationLinks.length);
-
+                
                 // Restart the force layout.
                 force.nodes(vm.GraphContainer.PersonNodes)
                     .links(vm.GraphContainer.RelationLinks)
@@ -191,9 +199,9 @@
 
                   // Append images
                   var images = nodeEnter.append("svg:image")
-                        .attr("xlink:href",  function(){
-                                                var imgarr = [img1, img2, img3, img4];
-                                                return imgarr[Math.floor(Math.random()*imgarr.length)];
+                        .attr("xlink:href",  function(x){
+                                                // console.log(x.thumbnail);
+                                                return x.thumbnail
                                          })
                         .attr("x", function(d) { return -25;})
                         .attr("y", function(d) { return -25;})
