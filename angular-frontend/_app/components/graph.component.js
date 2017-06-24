@@ -248,7 +248,15 @@
                             .attr('y1', (d) => d.source.y)
                             .attr('x2', (d) => d.target.x)
                             .attr('y2', (d) => d.target.y);
+
+                        node.attr("transform", nodeTransform);
                     }
+            }
+
+
+            //keeps nodes in bounds
+            function nodeTransform(d) {
+                return "translate(" + d.x + "," + d.y + ")";
             }
 
             update();
