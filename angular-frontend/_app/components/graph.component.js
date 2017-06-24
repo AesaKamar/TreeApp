@@ -200,8 +200,7 @@
                   // Append images
                   var images = nodeEnter.append("svg:image")
                         .attr("xlink:href",  function(x){
-                                                // console.log(x.thumbnail);
-                                                return x.thumbnail
+                                                return "data:image/png;base64," + x.thumbnail
                                          })
                         .attr("x", function(d) { return -25;})
                         .attr("y", function(d) { return -25;})
