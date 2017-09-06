@@ -26,7 +26,6 @@
     "mocha": "^3.2.0",
     "mv": "^2.1.1",
     "node-schedule": "^1.1.0",
-    "node-uuid": "^1.4.7",
     "passport": "~0.3.2",
     "passport-local": "~1.0.0",
     "randomstring": "~1.1.4",

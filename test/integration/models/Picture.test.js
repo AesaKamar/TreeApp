@@ -2,7 +2,7 @@ const assert = require('assert');
 const fs = require('fs');
 const Promise = require('bluebird');
 const faker = require('faker');
-const uuid = require('uuid')
+const uuid = require('node-uuid')
 const path = require('path')
 const testHelper = require('../../test_helpers')
 

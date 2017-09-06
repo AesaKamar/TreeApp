@@ -2,7 +2,6 @@ var fs = require('fs');
 var mv = require('mv');
 var path = require('path');
 var randomstring = require('randomstring');
-var uuid = require('uuid');
 
 module.exports = {
 
