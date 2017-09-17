@@ -48,3 +48,31 @@ In the Ginko container, run the application and start the server
 ```
 $ npm start
 ```
+
+# Windows
+On Windows Install the [Docker Toolbox on Windows](https://docs.docker.com/toolbox/toolbox_install_windows/#step-2-install-docker-toolbox)
+, run the tool then open the Docker Quickstart terminal. 
+
+Only the C:\Users directory is linked between the Virtual Machine and windows so place
+the project in that directory then run steps 1-4.
+
+Lastly, when you start the Docker Quickstart terminal you will see a message like -
+
+```
+
+                        ##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /"""""""""""""""""\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
+
+docker is configured to use the default machine with IP 192.168.99.100
+For help getting started, check out the docs at https://docs.docker.com
+
+Start interactive shell
+```
+To access the project go to 192.168.99.100:1337 (Any instance of localhost
+must be replaced with this provided IP)

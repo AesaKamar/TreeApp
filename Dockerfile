@@ -14,5 +14,5 @@ WORKDIR /usr/src/app
 EXPOSE 1337
 EXPOSE 5858
 # EXPOSE 9229
-# npm start command is further defined in pachage.json
+# npm start command is further defined in package.json
 CMD [ "npm", "start" ]
