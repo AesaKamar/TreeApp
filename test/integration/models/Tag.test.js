@@ -10,6 +10,8 @@ describe('TagModel', function() {
         });
     });
 
+    
+
     describe('#create()', function() {
         it('should create a new Tag and associate picture with person', function(done) {
             var found_person, found_picture = {};
@@ -60,6 +62,31 @@ describe('TagModel', function() {
         });
     });
 
+
+    describe('#createOneTag()', function(){
+        it('should create a tag for a sepcific person to a picture', 
+        (done)=>{
+           Person.findOne({
+               id: 2
+           })
+           .then((a_person)=>{
+               Picture.findOne(2)
+               .then((a_picture)=>{
+                Tag.create({
+                  person: a_person,
+                  picture: a_picture
+                })
+                .then((a_tag)=>{
+                    assert(a_tag.id);
+                    assert(a_tag.person = a_person.id);
+                    assert(a_tag.picture = a_picture.id);
+                    done();
+                });
+               });
+           });
+        });
+    });
+
     /*NOTE FOR GINKO DEVS ON Test fixtures
 
     You'll notice that the tests we use to seed data for use in playing with the front-end are called 'Creating fixtures'
@@ -97,6 +124,35 @@ describe('TagModel', function() {
         });
     });
 
+
+    describe('#destroyOneTagByTagId()',function(){
+        it('should delete a specific tag by tag id, unlink a person to a picture',
+        (done)=>{
+            Tag.destroy({id: 1})
+            .then((Target_tag)=>{
+                // assert(Target_tag.id == 1);
+                done();
+            })
+            .catch(done);
+        });
+    });
+
+    describe('#UpdateOneTag()', function() {
+        it('should change the information of a tag', 
+        (done)=> {
+            Tag.find({
+                    id: 1
+                })
+                .then((a_tag)=> {
+
+                    // some tests
+                    done();
+                })
+                .catch(done);
+        });
+    });        
+
+
     describe('#createOneTag()', function() {
         it('should creat a tag for a sepcific person to a picture',
             (done) => {
@@ -121,4 +177,5 @@ describe('TagModel', function() {
                     })
             });
     });
+
 });

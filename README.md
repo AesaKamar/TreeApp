@@ -37,6 +37,8 @@ $ docker-compose run -p 1337:1337  ginko bash
 
 # Step 3
 
+
+Noraml start
 In the Ginko container, run the tests to seed testing data into the database
 ```
 $ npm test
@@ -47,4 +49,9 @@ $ npm test
 In the Ginko container, run the application and start the server
 ```
 $ npm start
+```
+
+Start test
+```
+$ npm test
 ```
