@@ -1,4 +1,4 @@
-Follow these steps[http://shripalsoni.com/blog/configure-eslint-in-visual-studio-code/] 
+Follow these [steps](http://shripalsoni.com/blog/configure-eslint-in-visual-studio-code/)
 to enable ESLINT in VS Code.
 
 Go to files->preferences->settings and add these two lines - 
