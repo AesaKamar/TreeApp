@@ -6,14 +6,14 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Ginko Family Tree</h1>
+          <h1 className="App-title"> {'Ginko Family Tree'}</h1>
         </header>
         <p className="App-intro">
-          This is our app!
+          {'This is our app!'}
         </p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
