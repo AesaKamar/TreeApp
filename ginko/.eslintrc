@@ -1,0 +1,28 @@
+{
+    "plugins": [
+        "react"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "es6":     true,
+        "browser": true,
+        "node":    true,
+        "mocha":   true,
+        "jasmine": true        
+    },   
+    "extends": [
+        "eslint:recommended", 
+        "plugin:react/recommended",
+        "reactjs"
+    ],    
+    "rules": {
+        "semi": [2,"never"],
+        "semi-spacing": 0
+    }
+}

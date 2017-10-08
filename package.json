@@ -37,7 +37,8 @@
     "sails-postgresql": "~0.11.4"
   },
   "scripts": {
-    "start": "nodemon --ignore 'angular-frontend/*' --debug --inspect app.js",
+    "start-angular": "nodemon --ignore 'angular-frontend/*' --debug --inspect app.js",
+    "start": "cd ginko/ && npm start",
     "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js"
   },
   "main": "app.js",
