@@ -40,7 +40,10 @@
   "scripts": {
     "start-angular": "nodemon --ignore 'angular-frontend/*' --debug --inspect app.js",
     "start": "cd ginko/ && npm start",
-    "test": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js"
+    "test-angular": "node ./node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js",
+    "precommit-msg": "cd ginko && npm run precommit-msg",
+    "test": "cd ginko/ && npm run test",
+    "lint": "cd ginko/ && npm run lint"
   },
   "main": "app.js",
   "repository": {
@@ -50,8 +53,14 @@
   "author": "aesa",
   "license": "",
   "devDependencies": {
-    "nodemon": "^1.11.0",
     "faker": "latest",
+    "nodemon": "^1.11.0",
+    "pre-commit": "^1.2.2",
     "supertest": "^2.0.1"
-  }
+  },
+  "precommit": [
+    "precommit-msg",
+    "lint",
+    "test"
+  ]
 }
