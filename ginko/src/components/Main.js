@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import GraphView from '../views/GraphView'
+import LoginView from '../views/LoginView'
 
 class Main extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 id="App-title">{'Ginko Family Tree'}</h1>
-        </header>
-        <p id="App-intro">
-          {'This is our app!'}
-        </p>
-      </div>
+      <Switch>
+        <Route exact path="/graph" component={GraphView}/>
+        <Route exact path="/login" component={LoginView}/>
+      </Switch>
     )
   }
 }
