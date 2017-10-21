@@ -1,0 +1,43 @@
+@import url("colors.css");
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  background-color: var(--primary-color);
+  text-align: center;
+
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+li {
+    text-align: center;
+}
+
+a {
+    color: var(--accent-color);
+    text-align: center;
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+}
+
+.flex-item {
+  padding: 2px;
+  width: 100px;
+  height: 50px;
+  margin: 2px;
+  line-height: 100px;
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  background: #343637;
+  border-bottom: solid var(--secondary-color) 3px;
+
+}
