@@ -1,0 +1,52 @@
+@import url("colors.css");
+
+.nav-bar {
+  display: flex;
+  flex-direction: column;
+  height: 65px;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: row;
+  flex: 6;
+  background-color: var(--primary-color);
+}
+
+.nav-accent {
+  flex: 1;
+  background-color: var(--secondary-color);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  width: 75px;
+  padding: 10px;
+}
+
+.nav-item:hover {
+  opacity: 0.8;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: var(--accent-color);
+}
+
+.link-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 14;
+}
+
+.link-accent {
+  flex: 1;
+  background-color: var(--accent-color);
+}
+
+.link-accent-selected {
+  flex: 1;
+  background-color: var(--secondary-color);
+}
