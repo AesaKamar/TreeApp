@@ -8,7 +8,7 @@ Made with:
 
 > -**Angular**, A frontend MVVM framework
 
-> -**Bluebird**, A promise library which manages the complexities of async code 
+> -**Bluebird**, A promise library which manages the complexities of async code
 
 > -**D3JS**, An SVG based web framework for creating beautiful data visualizations
 
@@ -18,7 +18,36 @@ Made with:
 
 > -**Docker**, Great for shipping and provisioning environments
 
-Fast Installation Guidence
+# Instructions for running React
+
+# Step 1
+
+Currently React only nuns locally. Navigate to the ginko folder,
+and install the app using
+
+```
+npm install
+```
+
+# Step 2
+
+And run the react application using
+
+```
+npm start
+```
+
+# Windows
+
+On Windows Install the [Docker Toolbox on Windows](https://docs.docker.com/toolbox/toolbox_install_windows/#step-2-install-docker-toolbox)
+, run the tool then open the Docker Quickstart terminal.
+
+Only the C:\Users directory is linked between the Virtual Machine and windows so place
+the project in that directory then run steps 1 and 2.
+
+# Instructions for running Angular
+
+Fast Installation Guidance
 
 # Step 1
 
@@ -51,7 +80,7 @@ $ npm start
 
 # Windows
 On Windows Install the [Docker Toolbox on Windows](https://docs.docker.com/toolbox/toolbox_install_windows/#step-2-install-docker-toolbox)
-, run the tool then open the Docker Quickstart terminal. 
+, run the tool then open the Docker Quickstart terminal.
 
 Only the C:\Users directory is linked between the Virtual Machine and windows so place
 the project in that directory then run steps 1-4.
