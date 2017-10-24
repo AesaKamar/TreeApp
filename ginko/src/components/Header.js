@@ -17,6 +17,11 @@ class Header extends Component {
         path: '/graph',
         text: 'Graph',
         id: 1
+      },// added Third
+      {
+        path: '/third',
+        text: 'Third',
+        id: 3
       }
     ]
     this.state = {
@@ -32,6 +37,7 @@ class Header extends Component {
 
   setActive(id:number) {
     this.setState({ navItemSelected: id })
+    console.log("Button was clicked")
   }
 
   // render a link in the navbar
@@ -49,7 +55,7 @@ class Header extends Component {
         <div className="link-box">
           <Link onClick={this.setActive.bind(this, navItem.id)}
             to={navItem.path}
-          >
+            >
             {navItem.text}
           </Link>
         </div>
@@ -71,5 +77,6 @@ class Header extends Component {
     )
   }
 }
+
 
 export default Header
