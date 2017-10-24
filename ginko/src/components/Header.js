@@ -17,6 +17,16 @@ class Header extends Component {
         path: '/graph',
         text: 'Graph',
         id: 1
+      },
+      {
+        path: '/people',
+        text: 'People',
+        id: 2
+      },
+      {
+        path: '/profile',
+        text: 'Profile',
+        id: 3
       }
     ]
     this.state = {
