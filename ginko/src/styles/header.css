@@ -36,6 +36,10 @@
 .nav-item a {
   text-decoration: none;
   color: var(--accent-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 14;
 }
 
 .link-box {
@@ -53,4 +57,9 @@
 .link-accent-selected {
   flex: 1;
   background-color: var(--secondary-color);
+}
+
+a {
+  height: 100%;
+  width: 100%;
 }
