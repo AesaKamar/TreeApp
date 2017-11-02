@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "enzyme-adapter-react-16": "^1.0.1",
+    "ginko-api-service": "git+https://github.com/MatthewMawby/ginko-api-service.git",
+    "lodash": "^4.17.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.2.2"

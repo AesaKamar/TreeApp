@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
+import GraphContainer from '../components/GraphContainer'
+
+
 class GraphView extends Component {
   render() {
     return (
       <div>
-        <p>{'GraphView'}</p>
+        <GraphContainer />
       </div>
     )
   }
