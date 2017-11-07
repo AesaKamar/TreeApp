@@ -1,0 +1,10 @@
+@import url("colors.css");
+
+.form-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--primary-light-color);
+  padding-top: 35%;
+}

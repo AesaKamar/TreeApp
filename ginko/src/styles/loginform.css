@@ -1,0 +1,45 @@
+@import url("colors.css");
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 150px;
+  background-color: var(--primary-dark-color);
+  border-radius: 5px;
+  padding: 10px;
+  justify-content: flex-end;
+}
+
+.input-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.email {
+  border-radius: 3px;
+}
+
+.email.valid {
+
+}
+
+.email.dirty {
+
+}
+
+.password {
+  border-radius: 3px;
+}
+
+.password.valid {
+
+}
+
+.login-button {
+
+}
