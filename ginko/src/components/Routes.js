@@ -4,6 +4,7 @@ import GraphView from '../views/GraphView'
 import LoginView from '../views/LoginView'
 import PeopleView from '../views/PeopleView'
 import ProfileView from '../views/ProfileView'
+import NotFoundView from '../views/NotFoundView'
 
 class Routes extends Component {
   render() {
@@ -14,6 +15,7 @@ class Routes extends Component {
         <Route exact path="/login" component={LoginView}/>
         <Route exact path="/people" component={PeopleView}/>
         <Route exact path="/profile" component={ProfileView}/>
+        <Route path="*" component={NotFoundView} />
       </Switch>
     )
   }
